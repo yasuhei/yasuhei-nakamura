@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  min-width: 0;
+}
+
+
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px !important; /* Largura da barra de rolagem */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #312e81 !important; /* Cor de fundo */
+  border-radius: 10px !important;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #888 !important; /* Cor do polegar */
+  border-radius: 10px !important;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555 !important; /* Cor do polegar ao passar o mouse */
+}
