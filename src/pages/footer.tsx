@@ -18,7 +18,7 @@ export function Footer() {
                         </li>
                     </ul>
             <footer className="flex justify-center items-center py-8 w-full bg-zinc-900">
-                <p className="font-bold"> Copyright © 2024 Todos os direitos reservados.</p>
+                <p className="font-bold text-sm lg:text-lg"> Copyright © 2024 Todos os direitos reservados.</p>
             </footer>
         </div>
     )

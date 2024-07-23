@@ -57,20 +57,20 @@ export function Header() {
 
         {modalOpen === true && (
             <>
-        <ul className="sm:hidden flex flex-col mt-4 space-y-2 mr-4 items-end absolute z-40 bg-black w-full opacity-90 h-full pr-4">
-            <li className={`text-slate-100 font-medium hover:text-indigo-500 ${activeLink === 'sobre' ? 'text-indigo-500' : ''}`}>
+        <ul className="sm:hidden flex flex-col mt-4 space-y-2 mr-4 items-end absolute z-40 bg-black w-full opacity-95 h-full pr-4">
+            <li className={`text-slate-100 font-medium py-6 hover:text-indigo-500 ${activeLink === 'sobre' ? 'text-indigo-500' : ''}`}>
                 <a href="#sobre" onClick={() => handleClick('sobre')}>Sobre</a>
             </li>
-            <li className={`text-slate-100 font-medium hover:text-indigo-500 ${activeLink === 'skills' ? 'text-indigo-500' : ''}`}>
+            <li className={`text-slate-100 font-medium py-6 hover:text-indigo-500 ${activeLink === 'skills' ? 'text-indigo-500' : ''}`}>
                 <a href="#skills" onClick={() => handleClick('skills')}>Skills</a>
             </li>
-            <li className={`text-slate-100 font-medium hover:text-indigo-500 ${activeLink === 'projetos' ? 'text-indigo-500' : ''}`}>
+            <li className={`text-slate-100 font-medium py-6 hover:text-indigo-500 ${activeLink === 'projetos' ? 'text-indigo-500' : ''}`}>
                 <a href="#projetos" onClick={() => handleClick('projetos')}>Projetos</a>
             </li>
-            <li className={`text-slate-100 font-medium hover:text-indigo-500 ${activeLink === 'experiencia' ? 'text-indigo-500' : ''}`}>
+            <li className={`text-slate-100 font-medium py-6 hover:text-indigo-500 ${activeLink === 'experiencia' ? 'text-indigo-500' : ''}`}>
                     <a href="#experiencia" onClick={() => handleClick('experiencia')}>Experiencia</a>
                 </li>
-            <li className={`text-slate-100 font-medium hover:text-indigo-500 ${activeLink === 'contato' ? 'text-indigo-500' : ''}`}>
+            <li className={`text-slate-100 font-medium py-6 hover:text-indigo-500 ${activeLink === 'contato' ? 'text-indigo-500' : ''}`}>
                 <a href="#contato" onClick={() => handleClick('contato')}>Contato</a>
             </li>
         </ul>
