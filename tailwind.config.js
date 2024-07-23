@@ -8,6 +8,22 @@ export default {
         serif: "Orbitron"
         
       },
+    animation: {
+        'bounceSlow': 'bounce 7s linear infinite ',
+      },
+      keyframes: {
+        bounce: {
+          '0%, 100%': {
+            transform: 'translateY(-10%)',
+            animationTimingFunction: 'cubic-bezier(1.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'translateY(-7%)',
+            animationTimingFunction: 'cubic-bezier(1, 0, 1.2, 1)',
+          },
+        },
+      },
+
       boxShadow: {
         shape:
           "0px 8px 8px rgba(0, 0, 0, 0.1), 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 2px 2px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.03), inset 0px 1px 0px rgba(255, 255, 255, 0.03)",

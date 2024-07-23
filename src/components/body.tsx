@@ -10,14 +10,15 @@ export function Body() {
         <h1 className="text-3xl pb-3">Yasuhei Nakamura</h1>
         <p className="w-96">Olá! Bem-vindo(a) ao meu portfólio! <br />
         Aqui você encontrará meus projetos mais recentes e as tecnologias que utilizo para criar soluções web eficazes. Explore os projetos e entre em contato para discutirmos como posso colaborar com você!</p>
-        <button className="border-2 mt-12 p-3 w-[300px] border-indigo-500 text-indigo-500 hover:border-indigo-950 hover:opacity-95 hover:text-indigo-950 transition duration-300 ease-in-out">
-        Baixar Currículo
-        </button>
+        <a href="src/assets/pdf"  download="yasuheiFrontend.pdf"  className="border-2 mt-12 p-3 w-[300px] border-indigo-500 text-indigo-500 hover:border-indigo-950 hover:opacity-95 hover:text-indigo-950 transition duration-300 ease-in-out inline-block text-center"
+>
+  Baixar Currículo
+</a>
+
         </div>
 
-        <div className="w-[830px]">
+        <div className="w-[830px] animate-bounceSlow">
             <img src={Image} alt="imagem ilustrativa de um programador" className="w-full" />
-            
         </div>
     </div>
     )

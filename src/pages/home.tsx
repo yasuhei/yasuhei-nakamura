@@ -1,5 +1,6 @@
 import { Body } from "../components/body";
 import { Header } from "../components/header";
+import { Experiencia } from "./experiencia";
 import { Footer } from "./footer";
 import { Projetos } from "./projetos";
 import { Skills } from "./skills";
@@ -13,6 +14,7 @@ export function Home() {
             <Body />
             <Sobre />
             <Skills />
+            <Experiencia />
             <Projetos />
             
         </section>
