@@ -17,7 +17,7 @@ export function Sobre() {
                     <h3 className='font-serif pt-4 '>Yasuhei Nakamura</h3>
                     <ul className='flex gap-11 pt-4'>
                         <li>
-                            <a href="mailto:yasuheinakamura@hotmail.com"><Mail className='text-indigo-500 hover:text-indigo-900 transition duration-300 ease-in-out'/> </a>
+                            <a href="mailto:yasuhei.nakamura@hotmail.com"><Mail className='text-indigo-500 hover:text-indigo-900 transition duration-300 ease-in-out'/> </a>
                         </li>
                         <li>
                             <a href="https://github.com/yasuhei"> < Github className='text-indigo-500 hover:text-indigo-900 transition duration-300 ease-in-out'/> </a>
