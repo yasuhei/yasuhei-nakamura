@@ -26,7 +26,6 @@ export function Projetos() {
                 img={Tiao} descricao={'Tião Carreiro'} texto={'Este projeto foi desenvolvido com base em um wireframe inicial detalhado, utilizando tecnologias modernas como ReactJS para a construção da interface do usuário e Tailwind CSS para estilização responsiva e eficiente. Além disso, foi implementado o Axios, uma biblioteca JavaScript, para realizar requisições HTTP de forma simplificada e eficaz à API, permitindo uma integração fluida e segura com os dados necessários. O uso de ReactJS garantiu uma experiência de usuário dinâmica e interativa, aproveitando ao máximo o conceito de componentização para modularizar e reutilizar código.'} link={'https://github.com/yasuhei/tiaoRepo'} />
 
                 
-                 
             </div>
         </div>
     )

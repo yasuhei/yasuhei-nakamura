@@ -17,11 +17,11 @@ export function Skills() {
             <div className="h-[1px] w-full bg-gradient-to-r from-indigo-500  my-6"></div>
             <Swiper
             centeredSlides={true}
-            slidesPerView={5}
+            slidesPerView={7}
             loop
             autoplay={{
               delay: 1500,
-              disableOnInteraction: true,
+              disableOnInteraction: true
             }}
             modules={[Autoplay]}
             className="w-[90%]"
