@@ -13,7 +13,7 @@ export function Sobre() {
             </div>
             <div className="bg-zinc-900 flex md:flex-row justify-around items-center pt-9 w-full px-[5%] flex-col">
                 <div className='flex min-w-48 min-h-48 max-w-96  justify-center flex-col items-center'>
-                    <img src={Selfie} alt="" className='w-full h-[200px] border-4 file:border-solid border-indigo-900 rounded-full'  />
+                    <img src={Selfie} alt="foto do Yasuhei" className='h-48 border-4 file:border-solid border-indigo-900 rounded-full'  />
                     <h3 className='font-serif pt-4 '>Yasuhei Nakamura</h3>
                     <ul className='flex gap-11 pt-4'>
                         <li>

@@ -12,13 +12,13 @@ export function Experiencia() {
     }
 
     return (
-        <div className="pt-6 flex justify-center items-center w-full flex-col bg-zinc-900 " id="experiencia">
+        <div className="pt-6 flex justify-center items-center w-full flex-col lg:bg-zinc-900 bg-zinc-950 " id="experiencia">
             <div className="pb-10">
                 <Title title={title} />
             </div>
 
-            <div className="flex gap-10 justify-center md:h-96 flex-col md:flex-row">
-                <div className="flex flex-col h-64 bg-zinc-950 md:w-[21%]">
+            <div className="flex gap-10 justify-center md:h-96 flex-col md:flex-row ">
+                <div className="flex flex-col h-64 bg-zinc-950 md:w-[21%] shadow-shape">
                     <div className={`px-5 py-5 cursor-pointer ${textoSelecionado === '1' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('1')}>
                         <h3>7COMm - People and tech to transform</h3>
                     </div>
@@ -39,7 +39,7 @@ export function Experiencia() {
 
                             {textoSelecionado === '1' && (
                                 <>
-                                    <CardExp titulo={'Desenvolvedor front-end'} data={'Ago 2023 - Atual'} empresa={'7COMm - People and tech to transform'} descricao={'Participei do desenvolvimento de um sistema de renegociação de dívidas para o banco Bradesco. Recebemos o endpoint da equipe de backend e implementamos as chamadas no nosso BFF (Backend for Frontend), utilizando o framework Nest.js. Organizamos o código em módulos responsáveis, integrados ao micro-frontend. No lado do frontend, utilizamos Angular, seguindo o design system Fluig, e realizamos testes unitários com Jest. Para garantir a qualidade, implementamos testes automatizados em ferramentas como Bamboo e SonarQube, seguindo metodologias ágeis. Além disso, aplicamos tagueamento e integrações com microserviços.'} />
+                                    <CardExp titulo={'Dev front-end'} data={'Ago 2023 - Atual'} empresa={'7COMm - People and tech to transform'} descricao={'Participei do desenvolvimento de um sistema de renegociação de dívidas para o banco Bradesco. Recebemos o endpoint da equipe de backend e implementamos as chamadas no nosso BFF (Backend for Frontend), utilizando o framework Nest.js. Organizamos o código em módulos responsáveis, integrados ao micro-frontend. No lado do frontend, utilizamos Angular, seguindo o design system Fluig, e realizamos testes unitários com Jest. Para garantir a qualidade, implementamos testes automatizados em ferramentas como Bamboo e SonarQube, seguindo metodologias ágeis. Além disso, aplicamos tagueamento e integrações com microserviços.'} />
 
                                 </>
                             )}
@@ -54,13 +54,13 @@ export function Experiencia() {
                             {textoSelecionado === '3' && (
                                 <>
 
-                                    <CardExp titulo={'Desenvolvedor front-end'} data={'Out 2022 - Jul 2023 · 10 m'} empresa={'Oráculo Meteorologia'} descricao={'Na Oráculo, participei ativamente do desenvolvimento de um sistema em pleno funcionamento, colaborando com uma equipe composta por dois back-ends, dois front-ends, dois DevOps e um CTO. Trabalhava frequentemente em conjunto com um backend na mesma task. Utilizamos amplamente a AWS para conectar ao banco de dados e outras aplicações. Um dos destaques foi o desenvolvimento de um avançado criador de tarefas, substituindo processos manuais anteriormente realizados em Excel, devido à complexidade das regras de negócio.Além disso, implementamos gráficos para análise de desempenho afetado por manutenções programadas. Mantínhamos reuniões diárias para alinhar nossas atividades. No desenvolvimento do sistema, adotamos tecnologias modernas como React.js, TypeScript e styled-components para assegurar uma interface de usuário eficiente e atualizada. Também integrávamos diversas APIs para melhorar a interação do sistema com outros serviços. Esta versão foca nas tecnologias utilizadas e nos aspectos técnicos do projeto na Oráculo.'} />
+                                    <CardExp titulo={'Dev front-end'} data={'Out 2022 - Jul 2023 · 10 m'} empresa={'Oráculo Meteorologia'} descricao={'Na Oráculo, participei ativamente do desenvolvimento de um sistema em pleno funcionamento, colaborando com uma equipe composta por dois back-ends, dois front-ends, dois DevOps e um CTO. Trabalhava frequentemente em conjunto com um backend na mesma task. Utilizamos amplamente a AWS para conectar ao banco de dados e outras aplicações. Um dos destaques foi o desenvolvimento de um avançado criador de tarefas, substituindo processos manuais anteriormente realizados em Excel, devido à complexidade das regras de negócio.Além disso, implementamos gráficos para análise de desempenho afetado por manutenções programadas. Mantínhamos reuniões diárias para alinhar nossas atividades. No desenvolvimento do sistema, adotamos tecnologias modernas como React.js, TypeScript e styled-components para assegurar uma interface de usuário eficiente e atualizada. Também integrávamos diversas APIs para melhorar a interação do sistema com outros serviços. Esta versão foca nas tecnologias utilizadas e nos aspectos técnicos do projeto na Oráculo.'} />
 
                                 </>
                             )}
                             {textoSelecionado === '4' && (
                                 <>
-                                    <CardExp titulo={'Desenvolvedor front-end'} data={'Out 2021 - Set  2022 · 11 m'} empresa={'Hausz - Pisos e Ambientes'} descricao={'Desenvolvemos um ERP utilizando o poderoso framework Angular, aproveitando as capacidades avançadas de TypeScript e SCSS para garantir uma aplicação robusta e escalável. Implementamos testes automatizados para assegurar a qualidade do software ao longo do desenvolvimento.Além disso, criei um clone personalizado do Trello, adaptando-o às especificidades e regras de negócio da empresa para permitir que os franqueados organizassem suas tarefas de maneira eficiente. Utilizei a biblioteca pdfmake para gerar PDFs personalizados dinamicamente.Para complementar, desenvolvi landing pages utilizando HTML, CSS e JavaScript, proporcionando uma experiência de usuário atraente e interativa."Esta versão destaca as tecnologias específicas utilizadas em cada parte do projeto, focando nos frameworks e ferramentas relevantes para cada funcionalidade desenvolvida.'} />
+                                    <CardExp titulo={'Dev front-end'} data={'Out 2021 - Set  2022 · 11 m'} empresa={'Hausz - Pisos e Ambientes'} descricao={'Desenvolvemos um ERP utilizando o poderoso framework Angular, aproveitando as capacidades avançadas de TypeScript e SCSS para garantir uma aplicação robusta e escalável. Implementamos testes automatizados para assegurar a qualidade do software ao longo do desenvolvimento.Além disso, criei um clone personalizado do Trello, adaptando-o às especificidades e regras de negócio da empresa para permitir que os franqueados organizassem suas tarefas de maneira eficiente. Utilizei a biblioteca pdfmake para gerar PDFs personalizados dinamicamente.Para complementar, desenvolvi landing pages utilizando HTML, CSS e JavaScript, proporcionando uma experiência de usuário atraente e interativa."Esta versão destaca as tecnologias específicas utilizadas em cada parte do projeto, focando nos frameworks e ferramentas relevantes para cada funcionalidade desenvolvida.'} />
 
                                 </>
                             )}
