@@ -8,10 +8,10 @@ export function Sobre() {
 
     return(
         <section id="sobre" className='w-full'>
-            <div className=' bg-image bg-contain bg-repeat-x bg-center-bottom h-32 flex justify-center items-end '>
+            <div className='h-16 bg-image bg-contain bg-repeat-x bg-center-bottom  flex justify-center items-end  md:h-32'>
             <Title title={sectionOne}/>
             </div>
-            <div className="bg-zinc-900 flex justify-around items-center pt-9 w-full px-[5%] ">
+            <div className="bg-zinc-900 flex md:flex-row justify-around items-center pt-9 w-full px-[5%] flex-col">
                 <div className='flex min-w-48 min-h-48 max-w-96  justify-center flex-col items-center'>
                     <img src={Selfie} alt="" className='w-full h-[200px] border-4 file:border-solid border-indigo-900 rounded-full'  />
                     <h3 className='font-serif pt-4 '>Yasuhei Nakamura</h3>
@@ -27,8 +27,8 @@ export function Sobre() {
                         </li>
                     </ul>
                 </div>
-                <div className='flex justify-around flex-col w-[620px]'>
-                <h2 className="uppercase text-lg pb-4 font-bold"> conheça um pouco sobre mim</h2>
+                <div className='flex justify-around flex-col text-center pt-4 md:w-[620px]'>
+                <h2 className="uppercase text-lg pb-4 font-bold "> conheça um pouco sobre mim</h2>
                 <p className=''>Olá, sou formado em Engenharia de Produção e tenho 33 anos. Desde 2019, tenho me dedicado à área de programação, inicialmente como desenvolvedor frontend. Em 2024, dei um passo significativo na minha carreira e me tornei desenvolvedor full-stack, utilizando tecnologias de ponta como React.js, Angular 8+ e NestJS. Atualmente, estou focado em aprofundar meus conhecimentos em backend, buscando sempre evolução e excelência no que faço. </p>
                 </div>
             </div>

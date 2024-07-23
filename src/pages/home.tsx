@@ -9,7 +9,7 @@ import { Sobre } from "./sobre";
 export function Home() {
     return (
         <>
-        <section className="flex flex-col items-center min-h-screen px-20 py-10">
+        <section className="flex flex-col items-center min-h-screen sm:px-10 sm:py-5  md:px-20 md:py-10 ">
             <Header />
             <Body />
             <Sobre />
