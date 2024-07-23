@@ -7,7 +7,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />
   }
-])
+],{
+  basename: "/yasuhei-nakamura",
+
+}
+)
 
 export function App() { 
     return <RouterProvider router={router} />
