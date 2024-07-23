@@ -3,23 +3,23 @@ import Image  from '../assets/SVG PROGRAMADOR 04.svg'
 
 export function Body() {
     return(
-        <div className="flex  items-center justify-center w-full  bg-gradient-custom  bg-custom-radial">
-        <div className=" w-full h-60 pt-4">
-            
-        <span className="text-xl font-bold mb-4 text-indigo-500 uppercase font-serif">Desenvolvedor Full-stack</span>
-        <h1 className="text-3xl pb-3">Yasuhei Nakamura</h1>
-        <p className="w-96">Olá! Bem-vindo(a) ao meu portfólio! <br />
-        Aqui você encontrará meus projetos mais recentes e as tecnologias que utilizo para criar soluções web eficazes. Explore os projetos e entre em contato para discutirmos como posso colaborar com você!</p>
-        <a href="src/assets/pdf"  download="yasuheiFrontend.pdf"  className="border-2 mt-12 p-3 w-[300px] border-indigo-500 text-indigo-500 hover:border-indigo-950 hover:opacity-95 hover:text-indigo-950 transition duration-300 ease-in-out inline-block text-center"
->
-  Baixar Currículo
-</a>
+<div className="flex items-center justify-center w-full bg-gradient-custom bg-custom-radial relative">
+    <div className="max-w-3xl mx-auto px-4 py-8">
+        <span className="sm:text-lg md:text-xl font-bold mb-4 text-indigo-500 uppercase font-serif">Desenvolvedor Full-stack</span>
+        <h1 className="sm:text-2xl  md:text-3xl pb-3">Yasuhei Nakamura</h1>
+        <p className="sm:text-sm md:text-2xl max-w-md mb-4">Olá! Bem-vindo(a) ao meu portfólio! <br />
+    Aqui você encontrará meus projetos mais recentes e as tecnologias que utilizo para criar soluções web eficazes. Explore os projetos e entre em contato para discutirmos como posso colaborar com você!
+</p>
 
-        </div>
-
-        <div className="w-[830px] animate-bounceSlow">
-            <img src={Image} alt="imagem ilustrativa de um programador" className="w-full" />
-        </div>
+        <a href="src/assets/pdf" download="yasuheiFrontend.pdf" className="inline-block px-6 py-3 border-2 border-indigo-500 text-indigo-500 hover:border-indigo-950 hover:opacity-95 hover:text-indigo-950 transition duration-300 ease-in-out sm:mt-4">
+            Baixar Currículo
+        </a>
     </div>
+
+    <div className="w-full sm:block hidden md:w-2/3  xl:w-2/3 mt-8">
+        <img src={Image} alt="imagem ilustrativa de um programador" className="w-full" />
+    </div>
+</div>
+
     )
 }

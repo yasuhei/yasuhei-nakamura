@@ -6,7 +6,7 @@ export function Footer() {
     return(
         <div className="pt-6 flex justify-center items-center w-full flex-col" id="contato">
             <Title title={title}/>
-            <ul className=' gap-11 py-8 flex justify-center items-center '>
+            <ul className=' gap-11 py-8 flex justify-center items-center flex-col md:flex-row  '>
                         <li>
                             <a className='flex justify-center items-center w-full gap-2 text-center' href="mailto:yasuhei.nakamura@hotmail.com"><Mail className='text-indigo-500 hover:text-indigo-900 transition duration-300 ease-in-out'/> yasuhei.nakamura@hotmail.com </a>
                         </li>
