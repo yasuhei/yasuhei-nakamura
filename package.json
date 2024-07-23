@@ -1,4 +1,5 @@
 {
+  "homepage": "https://yasuhei.github.io/yasuhei-nakamura",
   "name": "portifolio",
   "private": true,
   "version": "0.0.0",
@@ -8,11 +9,14 @@
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "vite start --host meu.ip"
+    "start": "vite start --host meu.ip",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
+    "gh-pages": "^6.1.1",
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
