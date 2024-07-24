@@ -1,5 +1,5 @@
 import Image  from '../assets/SVG PROGRAMADOR 04.svg'
-import pdf from '../assets/pdf/yasuheiFrontend.pdf'
+import pdf from '../assets/pdf/Yasuhei_Nakamura.pdf'
 
 export function Body() {
     return(
