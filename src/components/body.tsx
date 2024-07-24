@@ -1,4 +1,5 @@
 import Image  from '../assets/SVG PROGRAMADOR 04.svg'
+import pdf from '../assets/pdf/yasuheiFrontend.pdf'
 
 export function Body() {
     return(
@@ -10,7 +11,7 @@ export function Body() {
     Aqui você encontrará meus projetos mais recentes e as tecnologias que utilizo para criar soluções web eficazes. Explore os projetos e entre em contato para discutirmos como posso colaborar com você!
 </p>
 
-        <a href="../assets/pdf/yasuheiFrontend.pdf" download="yasuheiFrontend.pdf" className="inline-block px-6 py-3 mt-2 lg:mt-0 border-2 border-indigo-500 text-indigo-500 hover:border-indigo-950 hover:opacity-95 hover:text-indigo-950 transition duration-300 ease-in-out sm:mt-4">
+        <a href={pdf} download="yasuheiFrontend.pdf" className="inline-block px-6 py-3 mt-2 lg:mt-0 border-2 border-indigo-500 text-indigo-500 hover:border-indigo-950 hover:opacity-95 hover:text-indigo-950 transition duration-300 ease-in-out sm:mt-4">
             Baixar Currículo
         </a>
     </div>
