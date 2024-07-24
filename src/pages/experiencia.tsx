@@ -17,23 +17,23 @@ export function Experiencia() {
                 <Title title={title} />
             </div>
 
-            <div className="flex gap-10 justify-center md:h-96 flex-col md:flex-row ">
-                <div className="flex flex-col h-64 bg-zinc-950 md:w-[21%] shadow-shape">
-                    <div className={`px-5 py-5 cursor-pointer ${textoSelecionado === '1' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('1')}>
+            <div className="flex gap-10 justify-center  flex-col lg:flex-row ">
+                <div className="flex flex-col h-64 bg-zinc-950 lg:w-max-[42%] shadow-shape">
+                    <div className={`px-5 py-5 cursor-pointer shadow-shape ${textoSelecionado === '1' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('1')}>
                         <h3>7COMm - People and tech to transform</h3>
                     </div>
-                    <div className={`px-5 py-5 cursor-pointer ${textoSelecionado === '2' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('2')}>
+                    <div className={`px-5 py-5 cursor-pointer shadow-shape ${textoSelecionado === '2' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('2')}>
                         <h3>Indorama Brasil</h3>
                     </div>
-                    <div className={`px-5 py-5 cursor-pointer ${textoSelecionado === '3' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('3')}>
+                    <div className={`px-5 py-5 cursor-pointer shadow-shape ${textoSelecionado === '3' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('3')}>
                         <h3>Oráculo Meteorologia</h3>
                     </div>
-                    <div className={`px-5 py-5 cursor-pointer ${textoSelecionado === '4' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('4')}>
+                    <div className={`px-5 py-5 cursor-pointer shadow-shape ${textoSelecionado === '4' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('4')}>
                         <h3>Hausz - Pisos e Ambientes</h3>
                     </div>
                 </div>
 
-                <div className="md:w-[55%]">
+                <div className="lg:w-[55%]">
                     {textoSelecionado && (
                         <div>
 

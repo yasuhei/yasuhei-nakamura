@@ -9,7 +9,7 @@ descricao: string
 export function CardExp({ titulo, data, empresa, descricao}: ICardProps) {
     return(
         <>
-         <div className="flex items-center justify-between text-center  px-3 md:px-0 flex-col">
+         <div className="flex items-center justify-between text-center  px-3 lg:px-0 flex-col ">
             <span className="text-[10px] text-start w-full">Cargo</span>
             <div className="flex items-center justify-between w-full">
             <h4 className="font-bold text-base md:text-xl">{titulo}</h4>

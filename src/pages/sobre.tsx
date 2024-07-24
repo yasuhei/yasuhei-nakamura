@@ -8,10 +8,10 @@ export function Sobre() {
 
     return(
         <section id="sobre" className='w-full'>
-            <div className='h-16 bg-image bg-contain bg-repeat-x bg-center-bottom  flex justify-center items-end  md:h-32'>
+            <div className=' bg-image bg-contain bg-repeat-x bg-center-bottom  flex justify-center items-end   lg:h-32'>
             <Title title={sectionOne}/>
             </div>
-            <div className="bg-zinc-900 flex md:flex-row justify-around items-center pt-9 w-full px-[5%] flex-col">
+            <div className="bg-zinc-900 flex lg:flex-row justify-around items-center pt-9 w-full px-[5%] flex-col">
                 <div className='flex min-w-48 min-h-48 max-w-96  justify-center flex-col items-center'>
                     <img src={Selfie} alt="foto do Yasuhei" className='h-48 border-4 file:border-solid border-indigo-900 rounded-full'  />
                     <h3 className='font-serif pt-4 '>Yasuhei Nakamura</h3>
