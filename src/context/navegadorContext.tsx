@@ -1,10 +1,13 @@
-/* eslint-disable  */
+import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
-import { createContext, useState, useContext, useEffect } from 'react';
+// Definir o tipo para as props do LanguageProvider
+interface LanguageProviderProps {
+  children: ReactNode; 
+}
 
 const LanguageContext = createContext<string | undefined>(navigator.language);
 
-export const LanguageProvider: React.FC = ({ children }) => {
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState(navigator.language);
 
   useEffect(() => {
