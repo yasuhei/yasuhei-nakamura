@@ -9,7 +9,7 @@ import { icons } from "../Utils/img";
 
 
 export function Skills() {
-    const sectionTwo = "Skils";
+    const sectionTwo = "Skills";
 
     return (
         <div id="skills" className="pt-6 flex justify-center items-center w-full flex-col">
