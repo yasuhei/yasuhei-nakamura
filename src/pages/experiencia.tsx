@@ -1,9 +1,15 @@
 import { useState } from "react"
 import { Title } from "../components/title"
 import { CardExp } from "../components/cardExperiencia"
+import { useLanguage } from "../context/navegadorContext";
+import { expBr, expEn } from "../Utils/translate";
 
 export function Experiencia() {
-    const title = "Experiência"
+    const language = useLanguage();
+
+    const experienciaArray = language === 'pt-BR' ? expBr : expEn;
+    const ID = language === 'pt-BR' ? "experiência" : "experience";
+
     const [textoSelecionado, SetTextoSelecionado] = useState('1')
 
     const handleClick = (id: string) => {
@@ -12,9 +18,9 @@ export function Experiencia() {
     }
 
     return (
-        <div className="pt-6 flex justify-center items-center w-full flex-col lg:bg-zinc-900 bg-zinc-950 " id="experiencia">
+        <div className="pt-6 flex justify-center items-center w-full flex-col lg:bg-zinc-900 bg-zinc-950 " id={ID}>
             <div className="pb-10">
-                <Title title={title} />
+                <Title title={ID} />
             </div>
 
             <div className="flex gap-10 justify-center  flex-col lg:flex-row ">
@@ -36,32 +42,25 @@ export function Experiencia() {
                 <div className="lg:w-[55%]">
                     {textoSelecionado && (
                         <div>
-
                             {textoSelecionado === '1' && (
                                 <>
-                                    <CardExp titulo={'Dev front-end'} data={'Ago 2023 - Atual'} empresa={'7COMm - People and tech to transform'} descricao={'Participei do desenvolvimento de um sistema de renegociação de dívidas para o banco Bradesco. Recebemos o endpoint da equipe de backend e implementamos as chamadas no nosso BFF (Backend for Frontend), utilizando o framework Nest.js. Organizamos o código em módulos responsáveis, integrados ao micro-frontend. No lado do frontend, utilizamos Angular, seguindo o design system Fluig, e realizamos testes unitários com Jest. Para garantir a qualidade, implementamos testes automatizados em ferramentas como Bamboo e SonarQube, seguindo metodologias ágeis. Além disso, aplicamos tagueamento e integrações com microserviços.'} />
-
+                                    <CardExp titulo={experienciaArray[0].titulo} data={experienciaArray[0].mes} empresa={'7COMm - People and tech to transform'} descricao={experienciaArray[0].paragrafo} />
                                 </>
                             )}
                             {textoSelecionado === '2' && (
-
                                 <>
-                                    <CardExp titulo={'Analista de sistemas'} data={'Mai 2023 - Jul 2023 · 3 m'} empresa={'Indorama Brasil'} descricao={'Participei ativamente na criação de um portal dedicado aos colaboradores, integrando APIs tanto externas quanto internas para fornecer uma experiência integrada. Utilizamos práticas avançadas de versionamento no GitHub para um desenvolvimento colaborativo e organizado. Para garantir uma interface de usuário moderna e responsiva, implementamos o Material-UI, aproveitando suas capacidades de design e componentização. O projeto foi desenvolvido utilizando React.js, aproveitando ao máximo as funcionalidades dinâmicas e eficientes da biblioteca. Além disso, aplicamos JavaScript para lógica de programação essencial e Tailwind CSS para estilos customizados e escaláveis, garantindo uma aparência coesa e de fácil manutenção.'} />
-
+                                    <CardExp titulo={experienciaArray[1].titulo} data={experienciaArray[1].mes} empresa={'Indorama Brasil'} descricao={experienciaArray[1].paragrafo} />
                                 </>
 
                             )}
                             {textoSelecionado === '3' && (
                                 <>
-
-                                    <CardExp titulo={'Dev front-end'} data={'Out 2022 - Jul 2023 · 10 m'} empresa={'Oráculo Meteorologia'} descricao={'Na Oráculo, participei ativamente do desenvolvimento de um sistema em pleno funcionamento, colaborando com uma equipe composta por dois back-ends, dois front-ends, dois DevOps e um CTO. Trabalhava frequentemente em conjunto com um backend na mesma task. Utilizamos amplamente a AWS para conectar ao banco de dados e outras aplicações. Um dos destaques foi o desenvolvimento de um avançado criador de tarefas, substituindo processos manuais anteriormente realizados em Excel, devido à complexidade das regras de negócio.Além disso, implementamos gráficos para análise de desempenho afetado por manutenções programadas. Mantínhamos reuniões diárias para alinhar nossas atividades. No desenvolvimento do sistema, adotamos tecnologias modernas como React.js, TypeScript e styled-components para assegurar uma interface de usuário eficiente e atualizada. Também integrávamos diversas APIs para melhorar a interação do sistema com outros serviços. Esta versão foca nas tecnologias utilizadas e nos aspectos técnicos do projeto na Oráculo.'} />
-
+                                    <CardExp titulo={experienciaArray[2].titulo} data={experienciaArray[2].mes} empresa={'Oráculo Meteorologia'} descricao={experienciaArray[2].paragrafo} />
                                 </>
                             )}
                             {textoSelecionado === '4' && (
                                 <>
-                                    <CardExp titulo={'Dev front-end'} data={'Out 2021 - Set  2022 · 11 m'} empresa={'Hausz - Pisos e Ambientes'} descricao={'Desenvolvemos um ERP utilizando o poderoso framework Angular, aproveitando as capacidades avançadas de TypeScript e SCSS para garantir uma aplicação robusta e escalável. Implementamos testes automatizados para assegurar a qualidade do software ao longo do desenvolvimento.Além disso, criei um clone personalizado do Trello, adaptando-o às especificidades e regras de negócio da empresa para permitir que os franqueados organizassem suas tarefas de maneira eficiente. Utilizei a biblioteca pdfmake para gerar PDFs personalizados dinamicamente.Para complementar, desenvolvi landing pages utilizando HTML, CSS e JavaScript, proporcionando uma experiência de usuário atraente e interativa."Esta versão destaca as tecnologias específicas utilizadas em cada parte do projeto, focando nos frameworks e ferramentas relevantes para cada funcionalidade desenvolvida.'} />
-
+                                    <CardExp titulo={experienciaArray[3].titulo} data={experienciaArray[3].mes} empresa={'Hausz - Pisos e Ambientes'} descricao={experienciaArray[3].paragrafo} />
                                 </>
                             )}
                         </div>

@@ -1,3 +1,5 @@
+import { useLanguage } from "../context/navegadorContext";
+
 interface ICardProps {
 titulo: string;
 data: string;
@@ -7,10 +9,14 @@ descricao: string
 
 
 export function CardExp({ titulo, data, empresa, descricao}: ICardProps) {
+    const language = useLanguage();
+    const title = language === 'pt-BR' ? "Cargo" : "Position";
+
+
     return(
         <>
          <div className="flex items-center justify-between text-center  px-3 lg:px-0 flex-col ">
-            <span className="text-[10px] text-start w-full">Cargo</span>
+            <span className="text-[10px] text-start w-full">{title}</span>
             <div className="flex items-center justify-between w-full">
             <h4 className="font-bold text-base md:text-xl">{titulo}</h4>
             <p className="text-zinc-400 text-xs">{data}</p>

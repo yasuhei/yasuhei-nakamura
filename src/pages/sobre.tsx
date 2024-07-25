@@ -1,14 +1,22 @@
 import { Title } from '../components/title'
+import { useLanguage } from '../context/navegadorContext';
 import Selfie from '../img/67479901.jpeg'
 import { Mail, Github ,LinkedinIcon   } from 'lucide-react' 
+import { sobreBr, sobreEn } from '../Utils/translate';
 
 
 export function Sobre() {
-    const sectionOne = "Sobre";
+    const language = useLanguage();
+    const languageArray = language === 'pt-BR' ? sobreBr : sobreEn;
+
+    const { titulo, paragrafo } = languageArray[0];
+    const sectionOne = language === 'pt-BR' ? "Sobre" : "About";
+    const id = language === 'pt-BR' ? "sobre" : "about";
+
 
     return(
-        <section id="sobre" className='w-full'>
-            <div className=' bg-image bg-contain bg-repeat-x bg-center-bottom  flex justify-center items-end   lg:h-32'>
+        <section id={id} className='w-full'>
+            <div className=' bg-image bg-contain bg-repeat-x bg-center-bottom   flex justify-center items-end   lg:h-32'>
             <Title title={sectionOne}/>
             </div>
             <div className="bg-zinc-900 flex lg:flex-row justify-around items-center pt-9 w-full px-[5%] flex-col">
@@ -28,8 +36,8 @@ export function Sobre() {
                     </ul>
                 </div>
                 <div className='flex justify-around flex-col text-center pt-4 md:w-[620px]'>
-                <h2 className="uppercase text-lg pb-4 font-bold "> conheça um pouco sobre mim</h2>
-                <p className=''>Olá, sou formado em Engenharia de Produção e tenho 33 anos. Desde 2019, tenho me dedicado à área de programação, inicialmente como desenvolvedor frontend. Em 2024, dei um passo significativo na minha carreira e me tornei desenvolvedor full-stack, utilizando tecnologias de ponta como React.js, Angular 8+ e NestJS. Atualmente, estou focado em aprofundar meus conhecimentos em backend, buscando sempre evolução e excelência no que faço. </p>
+                <h2 className="uppercase text-lg pb-4 font-bold "> {titulo} </h2>
+                <p className=''>{paragrafo} </p>
                 </div>
             </div>
 
