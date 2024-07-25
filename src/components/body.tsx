@@ -1,11 +1,13 @@
 import { bodyBr, bodyEn } from '../Utils/translate';
 import Image from '../assets/SVG PROGRAMADOR 04.svg';
 import pdf from '../assets/pdf/Yasuhei_Nakamura.pdf';
+import pdfEn from '../assets/pdf/Yasuhei_Nakamura_-_FEng.pdf';
 import { useLanguage } from '../context/navegadorContext';
 
 export function Body() {
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? bodyBr : bodyEn;
+    const curric = language === 'pt-BR' ? pdf : pdfEn;
 
     const { titulo, paragrafo, paragrafo2, curriculo } = languageArray[0];
 
@@ -19,7 +21,7 @@ export function Body() {
                     {paragrafo2}
                 </p>
 
-                <a href={pdf} download="yasuheiFrontend.pdf" className="inline-block px-6 py-3 mt-2 lg:mt-0 border-2 border-indigo-500 text-indigo-500 hover:border-indigo-950 hover:opacity-95 hover:text-indigo-950 transition duration-300 ease-in-out sm:mt-4">
+                <a href={curric} download="yasuheiFrontend.pdf" className="inline-block px-6 py-3 mt-2 lg:mt-0 border-2 border-indigo-500 text-indigo-500 hover:border-indigo-950 hover:opacity-95 hover:text-indigo-950 transition duration-300 ease-in-out sm:mt-4">
                     {curriculo}
                 </a>
             </div>
