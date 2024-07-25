@@ -10,11 +10,12 @@ export function Body() {
     const { titulo, paragrafo, paragrafo2, curriculo } = languageArray[0];
 
     return (
+        <main>
         <div className="flex items-center justify-center w-full bg-gradient-custom bg-custom-radial relative">
             <div className="max-w-3xl mx-auto px-4 py-8">
-                <span className="sm:text-lg md:text-xl font-bold mb-4 text-indigo-500 uppercase font-serif">{titulo}</span>
-                <h1 className="text-xl lg:text-3xl pb-3">Yasuhei Nakamura</h1>
-                <p className="text-sm lg:text-2xl max-w-md mb-4">{paragrafo} <br />
+                <span className="sm:text-lg md:text-xl font-bold mb-4 text-indigo-500 uppercase font-serif" title={titulo}>{titulo}</span>
+                <h1 className="text-xl lg:text-3xl pb-3" title='Yasuhei Nakamura'>Yasuhei Nakamura</h1>
+                <p className="text-sm lg:text-2xl max-w-md mb-4" title={paragrafo}>{paragrafo} <br />
                     {paragrafo2}
                 </p>
 
@@ -27,5 +28,6 @@ export function Body() {
                 <img src={Image} alt="imagem ilustrativa de um programador" className="w-full" />
             </div>
         </div>
+        </main>
     );
 }

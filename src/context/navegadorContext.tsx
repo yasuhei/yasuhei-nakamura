@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
-// Definir o tipo para as props do LanguageProvider
 interface LanguageProviderProps {
   children: ReactNode; 
 }
