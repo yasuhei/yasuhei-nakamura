@@ -25,8 +25,8 @@ export function Header() {
 
     return (
         <header className="w-full pb-8">
-            <div className="px-4 py-2 lg:px-8 lg:w-full lg:py-4 text-center">
-                <div className="lg:mr-4 flex justify-between items-center p-3">
+            <div className="lg:w-full lg:py-4 text-center p-[3%] lg:p-0">
+                <div className="lg:mr-4 flex justify-between items-center ">
                     <a href="#" className="text-indigo-500 font-sans sm:text-base lg:text-2xl font-bold">
                         {"</"} <span className="text-slate-300 font-serif"> Yasuhei Nakamura </span> {" />"}
                     </a>
