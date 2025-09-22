@@ -14,12 +14,12 @@ export function Sobre() {
 
     const journeySlides = language === 'pt-BR' 
         ? [
-            { title: "Início da Jornada", desc: "Comecei como dev frontend em 2017, focando em React e UX.", icon: Code2 },
+            { title: "Início da Jornada", desc: "Comecei como dev frontend em 2019, focando em React e UX.", icon: Code2 },
             { title: "Especialização Full-Stack", desc: "Evoluí para full-stack com NestJS e Angular, liderando projetos em equipes.", icon: Award },
             { title: "Impacto e Colaboração", desc: "Atuo construindo soluções inovadoras, sempre em colaboração com minha equipe.", icon: Users }
           ]
         : [
-            { title: "Journey Start", desc: "Started as frontend dev in 2017, focusing on React and UX.", icon: Code2 },
+            { title: "Journey Start", desc: "Started as frontend dev in 2019, focusing on React and UX.", icon: Code2 },
             { title: "Full-Stack Expertise", desc: "Evolved to full-stack with NestJS and Angular, leading team projects.", icon: Award },
             { title: "Impact & Collaboration", desc: "Building innovative solutions in close collaboration with my team.", icon: Users }
           ];
