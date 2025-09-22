@@ -1,74 +1,167 @@
-import { useState } from "react"
-import { Title } from "../components/title"
-import { CardExp } from "../components/cardExperiencia"
+import { useState } from "react";
+import { motion } from "framer-motion"; // Para animações stagger e expand
+import { Title } from "../components/title";
+import { CardExp } from "../components/cardExperiencia"; // Mantido, mas estilizado
 import { useLanguage } from "../context/navegadorContext";
 import { expBr, expEn } from "../Utils/translate";
+import { Briefcase, Calendar, ChevronDown } from "lucide-react"; // Ícones para timeline (empresa, data, expandir)
 
 export function Experiencia() {
     const language = useLanguage();
-
     const experienciaArray = language === 'pt-BR' ? expBr : expEn;
     const ID = language === 'pt-BR' ? "experiência" : "experience";
 
-    const [textoSelecionado, SetTextoSelecionado] = useState('1')
+    const [expandedIndex, setExpandedIndex] = useState<number | null>(null); // Estado para expandir (em vez de string '1')
 
-    const handleClick = (id: string) => {
-        SetTextoSelecionado(id);
+    const handleToggle = (index: number) => {
+        setExpandedIndex(expandedIndex === index ? null : index); // Toggle expand/collapse
+        // Scroll suave para o item expandido
+        const element = document.getElementById(`exp-${index}`);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
 
-    }
+    // Animações para timeline (stagger: cada nó aparece com delay)
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 50, scale: 0.9 },
+        visible: { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1, 
+            transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } // Ease suave pro
+        }
+    };
+
+    const expandVariants = {
+        collapsed: { height: 'auto', opacity: 1 },
+        expanded: { 
+            height: 'auto', 
+            opacity: 1, 
+            transition: { duration: 0.4, ease: 'easeInOut' }
+        }
+    };
 
     return (
-        <div className="pt-6 flex justify-center items-center w-full flex-col lg:bg-zinc-900 bg-zinc-950 " id={ID}>
-            <div className="pb-10">
-                <Title title={ID} />
+        <section id={ID} className="w-full relative py-20 lg:py-32 overflow-hidden"> {/* Section semantic + padding pro */}
+            {/* Background Avançado: Gradiente mesh consistente com seções anteriores */}
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-blue-900/70 to-purple-900/80 dark:from-indigo-900/90 dark:via-blue-900/80 dark:to-purple-900/90" />
+            <div className="absolute inset-0 bg-gradient-to-tl from-indigo-500/20 via-transparent to-blue-500/20" /> {/* Camada glow */}
+            {/* Overlay Light Mode */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 to-white/90 dark:hidden" />
+
+            <div className="container mx-auto px-6 max-w-6xl relative z-10">
+                {/* Título Animado */}
+                <motion.div
+                    variants={itemVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="text-center mb-16"
+                >
+                    <Title title={ID} className="text-3xl lg:text-4xl font-black text-gray-900 dark:text-white tracking-tight" />
+                </motion.div>
+
+                {/* Timeline Container: Linha vertical central */}
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="relative"
+                >
+                    {/* Linha Central da Timeline (CSS para curva sutil) */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-indigo-400 to-blue-400 h-full opacity-60 dark:opacity-80 z-0" /> {/* Linha conectando nós */}
+
+                    {experienciaArray.map((exp, index) => {
+                        const isExpanded = expandedIndex === index;
+                        const isEven = index % 2 === 0; // Alterna lado para assimetria em desktop
+
+                        return (
+                            <motion.div
+                                key={index}
+                                variants={itemVariants}
+                                id={`exp-${index}`}
+                                className={`relative mb-16 flex flex-col lg:flex-row items-center justify-center gap-8 z-10 ${
+                                    isEven ? 'lg:flex-row-reverse' : ''
+                                }`} // Alterna direção para dinamismo
+                                style={{ originX: isEven ? 1 : 0 }} // Origem animação para hover
+                            >
+                                {/* Nó da Timeline: Ícone + Data + Empresa */}
+                                <motion.div
+                                    whileHover={{ scale: 1.05, y: -5 }}
+                                    className="flex flex-col items-center lg:w-1/3 text-center lg:text-left bg-gray-900/80 dark:bg-gray-900/90 backdrop-blur-md rounded-xl p-6 border border-indigo-500/30 dark:border-indigo-400/30 shadow-xl hover:shadow-indigo-500/25 transition-all duration-300" // Glass card pro
+                                >
+                                    {/* Dot do Nó (conectado à linha) */}
+                                    <div className="absolute -left-2.5 top-1/2 transform -translate-y-1/2 w-5 h-5 bg-indigo-500 rounded-full shadow-lg z-20" /> {/* Dot central */}
+                                    
+                                    <Briefcase size={32} className="text-indigo-400 mb-4" /> {/* Ícone empresa */}
+                                    <div className="space-y-2">
+                                        <h3 className="text-lg font-bold text-white dark:text-white">{exp?.empresa || experienciaArray[index].empresa}</h3> {/* Use prop empresa se disponível */}
+                                        <div className="flex items-center text-sm text-gray-300 dark:text-gray-300">
+                                            <Calendar size={16} className="mr-1 text-indigo-400" />
+                                            {exp?.data || experienciaArray[index].mes} {/* Formate como "2020 - Presente" no translate */}
+                                        </div>
+                                    </div>
+                                </motion.div>
+
+                                {/* Detalhes Expansíveis: CardExp Integrado */}
+                                <motion.div
+                                    variants={expandVariants}
+                                    initial="collapsed"
+                                    animate={isExpanded ? "expanded" : "collapsed"}
+                                    className={`lg:w-2/3 transition-all duration-500 overflow-hidden ${
+                                        isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                                    }`} // Collapse com height/max-height
+                                >
+                                    {isExpanded && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="bg-white/10 dark:bg-white/20 backdrop-blur-md rounded-xl p-6 border border-white/20 shadow-2xl" // Glass expandido
+                                        >
+                                            <CardExp 
+                                                titulo={exp.titulo} 
+                                                data={exp.mes} 
+                                                empresa={exp?.empresa || experienciaArray[index]?.empresa}
+                                                descricao={exp.paragrafo}
+                                            />
+                                            {/* Opcional: Adicione techs aqui se no translate */}
+                                            {/* <div className="flex gap-2 mt-4">
+                                                {exp.techs?.map((tech, i) => (
+                                                    <span key={i} className="px-3 py-1 bg-indigo-500/20 text-indigo-200 rounded-full text-sm">{tech}</span>
+                                                ))}
+                                            </div> */}
+                                        </motion.div>
+                                    )}
+                                </motion.div>
+
+                                {/* Botão Expandir (ícone chevron) */}
+                                <motion.button
+                                    onClick={() => handleToggle(index)}
+                                    whileHover={{ scale: 1.1 }}
+                                    className={`absolute -top-4 left-1/2 transform -translate-x-1/2 p-2 bg-indigo-500/80 rounded-full shadow-lg z-30 ${
+                                        isExpanded ? 'rotate-180' : ''
+                                    } transition-transform duration-300`} // Rotaciona ao expandir
+                                    aria-expanded={isExpanded}
+                                    aria-controls={`exp-${index}`}
+                                >
+                                    <ChevronDown size={20} className="text-white" />
+                                </motion.button>
+                            </motion.div>
+                        );
+                    })}
+                </motion.div>
             </div>
-
-            <div className="flex gap-10 justify-center  flex-col lg:flex-row ">
-                <div className="flex flex-col h-64 bg-zinc-950 lg:w-max-[42%] shadow-shape">
-                    <div className={`px-5 py-5 cursor-pointer shadow-shape ${textoSelecionado === '1' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('1')}>
-                        <h3>7COMm - People and tech to transform</h3>
-                    </div>
-                    <div className={`px-5 py-5 cursor-pointer shadow-shape ${textoSelecionado === '2' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('2')}>
-                        <h3>Indorama Brasil</h3>
-                    </div>
-                    <div className={`px-5 py-5 cursor-pointer shadow-shape ${textoSelecionado === '3' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('3')}>
-                        <h3>Oráculo Meteorologia</h3>
-                    </div>
-                    <div className={`px-5 py-5 cursor-pointer shadow-shape ${textoSelecionado === '4' ? 'border-l-2 border-indigo-900 text-indigo-900' : ''}`} onClick={() => handleClick('4')}>
-                        <h3>Hausz - Pisos e Ambientes</h3>
-                    </div>
-                </div>
-
-                <div className="lg:w-[55%]">
-                    {textoSelecionado && (
-                        <div>
-                            {textoSelecionado === '1' && (
-                                <>
-                                    <CardExp titulo={experienciaArray[0].titulo} data={experienciaArray[0].mes} empresa={'7COMm - People and tech to transform'} descricao={experienciaArray[0].paragrafo} />
-                                </>
-                            )}
-                            {textoSelecionado === '2' && (
-                                <>
-                                    <CardExp titulo={experienciaArray[1].titulo} data={experienciaArray[1].mes} empresa={'Indorama Brasil'} descricao={experienciaArray[1].paragrafo} />
-                                </>
-
-                            )}
-                            {textoSelecionado === '3' && (
-                                <>
-                                    <CardExp titulo={experienciaArray[2].titulo} data={experienciaArray[2].mes} empresa={'Oráculo Meteorologia'} descricao={experienciaArray[2].paragrafo} />
-                                </>
-                            )}
-                            {textoSelecionado === '4' && (
-                                <>
-                                    <CardExp titulo={experienciaArray[3].titulo} data={experienciaArray[3].mes} empresa={'Hausz - Pisos e Ambientes'} descricao={experienciaArray[3].paragrafo} />
-                                </>
-                            )}
-                        </div>
-                    )}
-                </div>
-            </div>
-
-
-        </div>
-    )
+        </section>
+    );
 }

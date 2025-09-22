@@ -8,6 +8,9 @@ export default {
         serif: "Orbitron"
         
       },
+       lineClamp: {
+                     4: ['line-clamp-4', '-webkit-line-clamp: 4'],
+                 },
     animation: {
         'bounceSlow': 'bounce 7s linear infinite ',
       },

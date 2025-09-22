@@ -1,61 +1,151 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion"; 
 import { useLanguage } from "../context/navegadorContext";
 import { idiomaBr, idiomaEn } from "../Utils/translate";
+import { MenuIcon, XIcon } from "lucide-react";
 
 export function Header() {
     const [activeLink, setActiveLink] = useState('');
-    const [modalOpen, setModalOpen] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false);
+    const [theme, setTheme] = useState<'light' | 'dark'>('light'); 
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? idiomaBr : idiomaEn;
 
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+        if (savedTheme) {
+            setTheme(savedTheme);
+            document.body.className = savedTheme; 
+        }
+    }, []);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element && element.getBoundingClientRect().top <= 100) {
+                    current = section;
+                }
+            });
+            setActiveLink(current);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleClick = (link: string) => {
         setActiveLink(link);
-        setModalOpen(false)
-
+        setModalOpen(false);
         const element = document.getElementById(link);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
-    }
+    };
 
     const openModal = (value: boolean) => {
-        setModalOpen(value)
-    }
+        setModalOpen(value);
+    };
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+        document.body.className = newTheme; 
+    };
+
+    const modalVariants = {
+        hidden: { x: '100%' }, 
+        visible: { x: 0 },
+        exit: { x: '100%' }
+    };
 
     return (
-        <header className="w-full pb-8">
-            <div className="lg:w-full lg:py-4 text-center p-[3%] lg:p-0">
-                <div className="lg:mr-4 flex justify-between items-center ">
-                    <a href="#" className="text-indigo-500 font-sans sm:text-base lg:text-2xl font-bold">
-                        {"</"} <span className="text-slate-300 font-serif"> Yasuhei Nakamura </span> {" />"}
-                    </a>
-                    <ul className="hidden lg:flex justify-around text-center items-center gap-6">
+        <motion.header
+            initial={{ y: -100 }} 
+            animate={{ y: 0 }}
+            className="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg transition-all duration-300" 
+        >
+            <div className="w-full py-4 px-[3%] lg:px-0"> 
+                <div className="lg:w-full flex justify-around items-center">
+                    <motion.a
+                        href="#home"
+                        whileHover={{ scale: 1.05 }} 
+                        className="text-indigo-500 dark:text-indigo-400 font-sans text-base lg:text-2xl font-bold"
+                        onClick={() => handleClick('home')} 
+                    >
+                        {"</"} <span className="text-slate-900 dark:text-slate-100 font-serif"> Yasuhei Nakamura </span> {"/>"} 
+                    </motion.a>
+
+                    {/* Navegação desktop */}
+                    <ul className="hidden lg:flex justify-around items-center gap-6">
                         {languageArray.map((item, index) => (
-                            <li key={index} className={`text-slate-100 font-medium hover:text-indigo-500 ${activeLink.toLowerCase() === item.toLowerCase() ? 'text-indigo-500' : ''}`}>
-                                <a href={`#${item.toLowerCase()}`} onClick={() => handleClick(item.toLowerCase())}>{item}</a>
+                            <li key={index}>
+                                <motion.a
+                                    href={`#${item.toLowerCase()}`}
+                                    onClick={(e) => { e.preventDefault(); handleClick(item.toLowerCase()); }}
+                                    className={`text-slate-900 dark:text-slate-100 font-medium hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors duration-200 ${
+                                        activeLink.toLowerCase() === item.toLowerCase() ? 'text-indigo-500 dark:text-indigo-400' : ''
+                                    }`}
+                                    whileHover={{ y: -2 }} 
+                                >
+                                    {item}
+                                </motion.a>
                             </li>
                         ))}
                     </ul>
-                    <div className="lg:hidden" onClick={() => openModal(!modalOpen)}>
-                        <button className="text-indigo-500 focus:outline-none">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
+
+                    {/* Botão hambúrguer para mobile */}
+                    <div className="lg:hidden flex items-center gap-4">
+                        <button
+                            onClick={() => openModal(!modalOpen)}
+                            className="text-indigo-500 dark:text-indigo-400 focus:outline-none hover:scale-110 transition-transform"
+                            aria-label={modalOpen ? "Fechar menu" : "Abrir menu"} 
+                        >
+                            {modalOpen ? <XIcon size={24} /> : <MenuIcon size={24} />} 
                         </button>
                     </div>
                 </div>
 
-                {modalOpen && (
-                    <ul className="lg:hidden flex flex-col mt-4 space-y-2 mr-4 items-center absolute z-40 bg-black w-full opacity-95 h-full pr-4">
-                        {languageArray.map((item, index) => (
-                            <li key={index} className={`text-slate-100 font-medium py-6 hover:text-indigo-500 ${activeLink.toLowerCase() === item.toLowerCase() ? 'text-indigo-500' : ''}`}>
-                                <a href={`#${item.toLowerCase()}`} onClick={() => handleClick(item.toLowerCase())}>{item}</a>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                <AnimatePresence>
+                    {modalOpen && (
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="fixed inset-0 bg-black/50 lg:hidden z-40"
+                                onClick={() => openModal(false)} 
+                            />
+                            <motion.ul
+                                variants={modalVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                transition={{ duration: 0.3 }}
+                                className="fixed top-0 right-0 lg:hidden flex flex-col mt-20 space-y-4 p-4 bg-white dark:bg-gray-900 w-64 h-full shadow-lg z-50" 
+                            >
+                                {languageArray.map((item, index) => (
+                                    <li key={index}>
+                                        <motion.a
+                                            href={`#${item.toLowerCase()}`}
+                                            onClick={(e) => { e.preventDefault(); handleClick(item.toLowerCase()); }}
+                                            className={`text-slate-900 dark:text-slate-100 font-medium py-4 px-2 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors block ${
+                                                activeLink.toLowerCase() === item.toLowerCase() ? 'text-indigo-500 dark:text-indigo-400' : ''
+                                            }`}
+                                            whileHover={{ x: 5 }}
+                                        >
+                                            {item}
+                                        </motion.a>
+                                    </li>
+                                ))}
+                            </motion.ul>
+                        </>
+                    )}
+                </AnimatePresence>
             </div>
-        </header>
+        </motion.header>
     );
 }
