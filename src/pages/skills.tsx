@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"; 
+import { motion, Variants } from "framer-motion"; 
 import { Title } from "../components/title";
 import { useLanguage } from "../context/navegadorContext"; 
 import "swiper/css";
@@ -11,7 +11,7 @@ import { icons } from "../Utils/img";
 export function Skills() {
     const language = useLanguage();
     const sectionTwo = language === 'pt-BR' ? "Habilidades" : "Skills"; 
-    const containerVariants = {
+    const containerVariants: Variants  = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -19,7 +19,7 @@ export function Skills() {
         }
     };
 
-    const slideVariants = {
+    const slideVariants: Variants  = {
         hidden: { opacity: 0, scale: 0.8 },
         visible: { 
             opacity: 1, 
@@ -44,7 +44,7 @@ export function Skills() {
                     viewport={{ once: true }}
                     className="text-center mb-8"
                 >
-                    <Title title={sectionTwo} className="text-3xl lg:text-4xl font-black text-gray-900 dark:text-white tracking-tight" />
+                    <Title title={sectionTwo}  />
                 </motion.div>
 
                 <motion.div
@@ -83,7 +83,7 @@ export function Skills() {
                         pagination={{ 
                             clickable: true,
                             dynamicBullets: true,
-                            renderBullet: (index, className) => `<span class="${className} bg-indigo-500/50 w-2 h-2 rounded-full"></span>`
+                            renderBullet: (className) => `<span class="${className} bg-indigo-500/50 w-2 h-2 rounded-full"></span>`
                         }}
                         navigation={{
                             nextEl: '.swiper-button-next',
@@ -134,18 +134,19 @@ export function Skills() {
                 </motion.div>
             </div>
 
-            <style jsx>{`
-                @keyframes shimmer {
-                    0% { transform: translateX(-100%); }
-                    100% { transform: translateX(100%); }
-                }
-                @keyframes shimmer-reverse {
-                    0% { transform: translateX(100%); }
-                    100% { transform: translateX(-100%); }
-                }
-                .animate-shimmer { animation: shimmer 2s infinite linear; }
-                .animate-shimmer-reverse { animation: shimmer-reverse 2s infinite linear; }
+            <style>{`
+            @keyframes shimmer {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+            }
+            @keyframes shimmer-reverse {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
+            .animate-shimmer { animation: shimmer 2s infinite linear; }
+            .animate-shimmer-reverse { animation: shimmer-reverse 2s infinite linear; }
             `}</style>
+
         </section>
     );
 }

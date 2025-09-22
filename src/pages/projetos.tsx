@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"; 
+import { motion, Variants } from "framer-motion"; 
 import { Title } from "../components/title";
 import { useLanguage } from "../context/navegadorContext"; 
 import { projBr, projEn } from "../Utils/translate";
@@ -65,7 +65,7 @@ export function Projetos() {
             : projectsData.filter(p => p.category === filter);
     }, [filter, projectsData]);
 
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -73,7 +73,7 @@ export function Projetos() {
         }
     };
 
-    const cardVariants = {
+    const cardVariants: Variants = {
         hidden: { opacity: 0, y: 30, scale: 0.95 },
         visible: { 
             opacity: 1, 
@@ -98,7 +98,7 @@ export function Projetos() {
                     viewport={{ once: true }}
                     className="text-center mb-12"
                 >
-                    <Title title={id} className="text-3xl lg:text-4xl font-black text-gray-900 dark:text-white tracking-tight" />
+                    <Title title={id} />
                 </motion.div>
 
                 <div className="flex justify-center mb-12 gap-4 flex-wrap">

@@ -7,17 +7,9 @@ import { MenuIcon, XIcon } from "lucide-react";
 export function Header() {
     const [activeLink, setActiveLink] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
-    const [theme, setTheme] = useState<'light' | 'dark'>('light'); 
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? idiomaBr : idiomaEn;
 
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-        if (savedTheme) {
-            setTheme(savedTheme);
-            document.body.className = savedTheme; 
-        }
-    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -49,12 +41,6 @@ export function Header() {
         setModalOpen(value);
     };
 
-    const toggleTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
-        document.body.className = newTheme; 
-    };
 
     const modalVariants = {
         hidden: { x: '100%' }, 

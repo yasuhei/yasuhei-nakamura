@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"; 
+import { motion, Variants } from "framer-motion"; 
 import { Mail, Github, Linkedin, ArrowUp } from 'lucide-react';
 import { Title } from "../components/title";
 import { footerBr, footerEn } from '../Utils/translate';
@@ -29,7 +29,7 @@ export function Footer() {
     };
 
     // Animações
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -37,7 +37,7 @@ export function Footer() {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, y: 20 },
         visible: { 
             opacity: 1, 
@@ -64,7 +64,7 @@ export function Footer() {
                     className="text-center mb-16"
                 >
                     <motion.div variants={itemVariants} className="mb-8">
-                        <Title title={id} className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-4" />
+                        <Title title={id}  />
                         <motion.p 
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}

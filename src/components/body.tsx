@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'; 
+import { motion, useScroll, useTransform, Variants } from 'framer-motion'; 
 import { bodyBr, bodyEn } from '../Utils/translate';
 import pdf from '../assets/pdf/Yasuhei_Nakamura.pdf';
 import pdfEn from '../assets/pdf/Yasuhei_Nakamura_-_FEng.pdf';
@@ -18,7 +18,7 @@ export function Body() {
         ? ["Desenvolvedor Full-Stack", "4+ Anos de Experiência", "Especialista em React/Angular"] 
         : ["Full-Stack Developer", "4+ Years Experience", "React/Angular Specialist"];
 
-    const containerVariants = {
+    const containerVariants: Variants  = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -26,7 +26,7 @@ export function Body() {
         }
     };
 
-    const itemVariants = {
+    const itemVariants:Variants  = {
         hidden: { opacity: 0, y: 30, scale: 0.95 },
         visible: { 
             opacity: 1, 

@@ -3,14 +3,13 @@ import { useLanguage } from '../context/navegadorContext';
 import Selfie from '../assets/eu.jpeg';
 import { Mail, Github, Linkedin, Code2, Award, Users } from 'lucide-react'; 
 import { sobreBr, sobreEn } from '../Utils/translate';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, Variants } from 'framer-motion';
 
 export function Sobre() {
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? sobreBr : sobreEn;
 
     const { titulo, paragrafo } = languageArray[0];
-    const sectionOne = language === 'pt-BR' ? "Sobre" : "About";
     const id = language === 'pt-BR' ? "sobre" : "about";
 
     const journeySlides = language === 'pt-BR' 
@@ -25,7 +24,7 @@ export function Sobre() {
             { title: "Impact & Collaboration", desc: "Building innovative solutions in close collaboration with my team.", icon: Users }
           ];
 
-    const containerVariants = {
+    const containerVariants: Variants  = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -33,7 +32,7 @@ export function Sobre() {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants  = {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
     };
