@@ -6,8 +6,6 @@
   min-width: 0;
 }
 
-
-
 .scrollbar::-webkit-scrollbar {
   width: 8px !important; /* Largura da barra de rolagem */
 }
@@ -24,4 +22,9 @@
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555 !important; /* Cor do polegar ao passar o mouse */
+}
+@layer base {
+  html {
+    @apply transition-colors duration-300;
+  }
 }
