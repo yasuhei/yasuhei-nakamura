@@ -97,6 +97,9 @@ export const projBr = [
     {
         paragrafo: "Este projeto foi desenvolvido com base em um wireframe inicial detalhado, utilizando tecnologias modernas como ReactJS para a construção da interface do usuário e Tailwind CSS para estilização responsiva e eficiente. Além disso, foi implementado o Axios, uma biblioteca JavaScript, para realizar requisições HTTP de forma simplificada e eficaz à API, permitindo uma integração fluida e segura com os dados necessários. O uso de ReactJS garantiu uma experiência de usuário dinâmica e interativa, aproveitando ao máximo o conceito de componentização para modularizar e reutilizar código.",
     },
+    {
+        paragrafo: "Arena FC é uma aplicação web desenvolvida para gerenciar times de futebol, permitindo criar, editar e visualizar informações sobre jogadores e equipes. O projeto utiliza React.js com TypeScript para garantir type-safety, Tailwind CSS para estilização moderna e responsiva, e implementa funcionalidades de CRUD completo para gestão de times.",
+    },
 
 ]
 
@@ -112,6 +115,9 @@ export const projEn = [
     },
     {
         paragrafo: "This project was developed based on a detailed initial wireframe, using modern technologies such as ReactJS to build the user interface and Tailwind CSS for responsive and efficient styling. In addition, Axios, a JavaScript library, was implemented to make simple and effective HTTP requests to the API, enabling smooth and secure integration with the necessary data. The use of ReactJS ensured a dynamic and interactive user experience, taking full advantage of the concept of componentization to modularize and reuse code."
+    },
+    {
+        paragrafo: "Arena FC is a web application developed to manage soccer teams, allowing you to create, edit and view information about players and teams. The project uses React.js with TypeScript to ensure type-safety, Tailwind CSS for modern and responsive styling, and implements full CRUD functionality for team management.",
     },
 
 ]

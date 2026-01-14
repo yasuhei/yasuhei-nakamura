@@ -7,6 +7,7 @@ import Img from '../img/image.png';
 import Img3 from '../img/OIP.jpeg';
 import Planner from '../img/planner.jpg';
 import Tiao from '../img/tiao.jpg';
+import ArenaFC from '../img/arena-fc.jpeg';
 
 import { useState, useMemo } from "react"; 
 
@@ -51,6 +52,15 @@ export function Projetos() {
             linkDemo: '',
             category: 'fullstack',
             techs: ['Angular', 'Firebase'],
+        },
+        {
+            img: ArenaFC,
+            descricao: 'Arena FC',
+            texto: projetosArray[4]?.paragrafo || '',
+            linkGit: 'https://github.com/yasuhei/arena-fc',
+            linkDemo: '',
+            category: 'frontend',
+            techs: ['React', 'TypeScript', 'Tailwind'],
         },
     ], [projetosArray]); 
 
