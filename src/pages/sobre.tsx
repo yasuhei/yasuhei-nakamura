@@ -1,6 +1,6 @@
 import {  useState, useEffect, useRef } from 'react'; 
 import { useLanguage } from '../context/navegadorContext';
-import Selfie from '../assets/eu.jpeg';
+import Selfie from '../assets/eu.jpg';
 import { Mail, Github, Linkedin, Code2, Award, Users } from 'lucide-react'; 
 import { sobreBr, sobreEn } from '../Utils/translate';
 import { motion, useScroll, useTransform, Variants } from 'framer-motion';

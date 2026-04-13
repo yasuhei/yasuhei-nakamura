@@ -16,7 +16,7 @@ export const bodyEn = [{
 }]
 export const sobreBr = [{
     titulo: "Sobre Mim",
-    paragrafo: "Olá, sou formado em Engenharia de Produção e tenho 33 anos. Desde 2019, tenho me dedicado à área de programação, inicialmente como desenvolvedor frontend. Em 2024, dei um passo significativo na minha carreira e me tornei desenvolvedor full-stack, utilizando tecnologias de ponta como React.js, Angular 8+ e NestJS. Atualmente, estou focado em aprofundar meus conhecimentos em backend, buscando sempre evolução e excelência no que faço.",
+    paragrafo: "Desenvolvedor fullstack com mais de 3 anos de experiência em aplicações web, principalmente no setor financeiro. Tenho forte atuação em frontend com React e Angular, além de experiência com backend em Node.js.Busco sempre desenvolver soluções escaláveis, com foco em performance e arquitetura bem estruturada.",
     journey: [
         { title: "Início da Jornada", desc: "Descrição...", icon: "Code2" }, // Use string para icon name se preferir
         // ...
@@ -24,7 +24,7 @@ export const sobreBr = [{
 }]
 export const sobreEn = [{
     titulo: 'get to know me',
-    paragrafo: "Hello, I have a degree in Production Engineering and I'm 33 years old. Since 2019, I've been working in programming, initially as a front-end developer. In 2024, I took a significant step in my career and became a full-stack developer, using cutting-edge technologies such as React.js, Angular 8+ and NestJS. I'm currently focused on deepening my backend knowledge, always seeking evolution and excellence in what I do.",
+    paragrafo: "“I’m a Fullstack Developer with 4+ years of experience building scalable web applications, mainly in the financial sector. I specialize in frontend development with React and Angular, and also work with backend services using Node.js.I focus on performance, clean architecture, and delivering real-world solutions."
 
 }]
 
