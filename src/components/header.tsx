@@ -9,11 +9,18 @@ export function Header() {
     const [modalOpen, setModalOpen] = useState(false);
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? idiomaBr : idiomaEn;
+    const sectionIds = language === 'pt-BR'
+        ? ['sobre', 'skills', 'projetos', 'experiência', 'contato']
+        : ['about', 'skills', 'projects', 'experience', 'contact'];
+    const navItems = languageArray.map((label, index) => ({
+        label,
+        id: sectionIds[index]
+    }));
 
 
     useEffect(() => {
         const handleScroll = () => {
-            const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+            const sections = ['home', ...sectionIds];
             let current = '';
             sections.forEach(section => {
                 const element = document.getElementById(section);
@@ -26,6 +33,38 @@ export function Header() {
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+    }, [sectionIds]);
+
+    useEffect(() => {
+        if (!modalOpen) {
+            document.body.style.overflow = '';
+            return;
+        }
+
+        document.body.style.overflow = 'hidden';
+
+        const handleEscape = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setModalOpen(false);
+            }
+        };
+
+        window.addEventListener('keydown', handleEscape);
+        return () => {
+            document.body.style.overflow = '';
+            window.removeEventListener('keydown', handleEscape);
+        };
+    }, [modalOpen]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1024) {
+                setModalOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const handleClick = (link: string) => {
@@ -49,11 +88,7 @@ export function Header() {
     };
 
     return (
-        <motion.header
-            initial={{ y: -100 }} 
-            animate={{ y: 0 }}
-            className="fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-md shadow-lg shadow-black/30 transition-all duration-300 border-b border-white/10"
-        >
+        <header className="fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-md shadow-lg shadow-black/30 transition-all duration-300 border-b border-white/10">
             <div className="w-full py-4 px-[3%] lg:px-0"> 
                 <div className="lg:w-full flex justify-around items-center">
                     <motion.a
@@ -67,17 +102,17 @@ export function Header() {
 
                     {/* Navegação desktop */}
                     <ul className="hidden lg:flex justify-around items-center gap-6">
-                        {languageArray.map((item, index) => (
-                            <li key={index}>
+                        {navItems.map((item) => (
+                            <li key={item.id}>
                                 <motion.a
-                                    href={`#${item.toLowerCase()}`}
-                                    onClick={(e) => { e.preventDefault(); handleClick(item.toLowerCase()); }}
+                                    href={`#${item.id}`}
+                                    onClick={(e) => { e.preventDefault(); handleClick(item.id); }}
                                     className={`text-slate-100 font-medium hover:text-amber-300 transition-colors duration-200 ${
-                                        activeLink.toLowerCase() === item.toLowerCase() ? 'text-amber-300' : ''
+                                        activeLink.toLowerCase() === item.id.toLowerCase() ? 'text-amber-300' : ''
                                     }`}
                                     whileHover={{ y: -2 }} 
                                 >
-                                    {item}
+                                    {item.label}
                                 </motion.a>
                             </li>
                         ))}
@@ -89,6 +124,8 @@ export function Header() {
                             onClick={() => openModal(!modalOpen)}
                             className="text-amber-300 focus:outline-none hover:scale-110 transition-transform"
                             aria-label={modalOpen ? "Fechar menu" : "Abrir menu"} 
+                            aria-expanded={modalOpen}
+                            aria-controls="mobile-menu"
                         >
                             {modalOpen ? <XIcon size={24} /> : <MenuIcon size={24} />} 
                         </button>
@@ -106,24 +143,25 @@ export function Header() {
                                 onClick={() => openModal(false)} 
                             />
                             <motion.ul
+                                id="mobile-menu"
                                 variants={modalVariants}
                                 initial="hidden"
                                 animate="visible"
                                 exit="exit"
                                 transition={{ duration: 0.3 }}
-                                className="fixed top-0 right-0 lg:hidden flex flex-col mt-20 space-y-4 p-4 bg-slate-950 w-64 h-full shadow-lg shadow-black/40 border-l border-white/10 z-50"
+                                className="fixed top-16 right-0 lg:hidden flex flex-col gap-2 px-5 py-4 bg-slate-950/95 backdrop-blur-md w-64 h-[calc(100dvh-4rem)] shadow-lg shadow-black/40 border-l border-white/10 z-50 overflow-y-auto"
                             >
-                                {languageArray.map((item, index) => (
-                                    <li key={index}>
+                                {navItems.map((item) => (
+                                    <li key={item.id}>
                                         <motion.a
-                                            href={`#${item.toLowerCase()}`}
-                                            onClick={(e) => { e.preventDefault(); handleClick(item.toLowerCase()); }}
+                                            href={`#${item.id}`}
+                                            onClick={(e) => { e.preventDefault(); handleClick(item.id); }}
                                             className={`text-slate-100 font-medium py-4 px-2 hover:text-amber-300 transition-colors block ${
-                                                activeLink.toLowerCase() === item.toLowerCase() ? 'text-amber-300' : ''
+                                                activeLink.toLowerCase() === item.id.toLowerCase() ? 'text-amber-300' : ''
                                             }`}
                                             whileHover={{ x: 5 }}
                                         >
-                                            {item}
+                                            {item.label}
                                         </motion.a>
                                     </li>
                                 ))}
@@ -132,6 +170,6 @@ export function Header() {
                     )}
                 </AnimatePresence>
             </div>
-        </motion.header>
+        </header>
     );
 }

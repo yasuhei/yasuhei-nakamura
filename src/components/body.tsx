@@ -47,7 +47,7 @@ export function Body() {
     }));
 
     return (
-        <main className="w-full min-h-screen flex items-center justify-center relative overflow-hidden">
+        <main id="home" className="w-full min-h-screen flex items-center justify-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#040508] via-[#0c1018] to-[#1a2230]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(244,167,105,0.24),transparent_38%),radial-gradient(circle_at_18%_80%,rgba(93,151,211,0.2),transparent_44%)]" />
             
