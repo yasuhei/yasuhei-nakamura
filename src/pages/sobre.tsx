@@ -41,7 +41,7 @@ export function Sobre() {
     const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -20]);
 
     const [currentSlide, setCurrentSlide] = useState(0);
-    const slideInterval = useRef<NodeJS.Timeout | null>(null);
+    const slideInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
     useEffect(() => {
         slideInterval.current = setInterval(() => {
@@ -60,13 +60,12 @@ export function Sobre() {
         <section id={id} className="w-full relative py-20 lg:py-32 overflow-hidden">
             <motion.div 
                 style={{ y: backgroundY }}
-                className="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-blue-900/70 to-purple-900/80 dark:from-indigo-900/90 dark:via-blue-900/80 dark:to-purple-900/90"
+                className="absolute inset-0 bg-gradient-to-br from-[#05070c] via-[#0b111b] to-[#161f2d]"
             />
-            <div className="absolute inset-0 opacity-10 dark:opacity-20"> 
-                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(135deg,_transparent_30%,_rgba(99,102,241,0.2)_30%,_rgba(99,102,241,0.2)_40%,_transparent_40%),linear-gradient(-135deg,_transparent_30%,_rgba(99,102,241,0.2)_30%,_rgba(99,102,241,0.2)_40%,_transparent_40%)] bg-[length:60px_60px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_24%,rgba(244,167,105,0.18),transparent_34%),radial-gradient(circle_at_14%_80%,rgba(107,171,232,0.14),transparent_42%)]" />
+            <div className="absolute inset-0 opacity-10"> 
+                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(135deg,_transparent_30%,_rgba(251,191,36,0.14)_30%,_rgba(251,191,36,0.14)_40%,_transparent_40%),linear-gradient(-135deg,_transparent_32%,_rgba(125,211,252,0.12)_32%,_rgba(125,211,252,0.12)_42%,_transparent_42%)] bg-[length:60px_60px]" />
             </div>
-
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 to-white/90 dark:hidden" /> 
 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <motion.div 
@@ -83,7 +82,7 @@ export function Sobre() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="grid lg:grid-cols-2 gap-12 items-center mb-16 bg-gray-900/80 dark:bg-gray-900/90 backdrop-blur-md rounded-2xl p-8 lg:p-12 border border-indigo-500/30 dark:border-indigo-400/30 shadow-2xl" // Fundo opaco (/80-90), border glow para pro
+                    className="grid lg:grid-cols-2 gap-12 items-center mb-16 bg-slate-950/60 backdrop-blur-md rounded-2xl p-8 lg:p-12 border border-amber-200/20 shadow-2xl"
                 >
                     <motion.div
                         variants={itemVariants}
@@ -95,13 +94,13 @@ export function Sobre() {
                             <img 
                                 src={Selfie} 
                                 alt="Foto profissional de Yasuhei Nakamura" 
-                                className="w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-indigo-500/70 dark:border-indigo-400/70 shadow-2xl drop-shadow-lg" // Border mais opaco (/70) para destaque
+                                className="w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-amber-200/50 shadow-2xl drop-shadow-lg"
                                 loading="lazy"
                             />
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 whileHover={{ opacity: 1 }}
-                                className="absolute inset-0 rounded-full bg-indigo-600/80 dark:bg-indigo-500/80 flex items-center justify-center backdrop-blur-md" // Fundo mais opaco (/80)
+                                className="absolute inset-0 rounded-full bg-slate-950/70 flex items-center justify-center backdrop-blur-md"
                             >
                                 <span className="text-white font-bold text-lg">Yasuhei Nakamura</span>
                             </motion.div>
@@ -112,10 +111,10 @@ export function Sobre() {
                         variants={itemVariants}
                         className="text-center lg:text-left space-y-6"
                     >
-                        <h2 className="text-2xl lg:text-3xl font-black uppercase text-white dark:text-white tracking-tight"> 
+                        <h2 className="text-2xl lg:text-3xl font-black uppercase text-white tracking-tight"> 
                             {titulo}
                         </h2>
-                        <p className="text-lg text-gray-100 dark:text-gray-100 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium"> 
+                        <p className="text-lg text-slate-200 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium"> 
                             {paragrafo}
                         </p>
                         <ul className="flex justify-center lg:justify-start gap-8 pt-6">
@@ -133,7 +132,7 @@ export function Sobre() {
                                         href={social.href} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
-                                        className="text-indigo-300 dark:text-indigo-300 hover:text-indigo-200 dark:hover:text-indigo-200 transition-all duration-300 p-3 bg-white/20 dark:bg-white/30 rounded-full backdrop-blur-sm shadow-lg hover:shadow-indigo-500/50" // Ícones mais claros (300), hover 200; bg mais opaco (/20-30)
+                                        className="text-amber-200 hover:text-amber-100 transition-all duration-300 p-3 bg-slate-900/70 rounded-full backdrop-blur-sm shadow-lg hover:shadow-amber-500/20 border border-amber-200/20"
                                         aria-label={social.label}
                                     >
                                         <social.icon size={24} />
@@ -153,10 +152,10 @@ export function Sobre() {
                     role="region"
                     aria-label="Carrossel da jornada profissional"
                 >
-                    <h3 className="text-xl font-bold text-center text-gray-900 dark:text-white mb-8 uppercase tracking-wide"> 
+                    <h3 className="text-xl font-bold text-center text-slate-100 mb-8 uppercase tracking-wide"> 
                         {language === 'pt-BR' ? "Minha Jornada" : "My Journey"}
                     </h3>
-                    <div className="relative overflow-hidden rounded-2xl bg-gray-900/80 dark:bg-gray-900/90 backdrop-blur-md border border-indigo-500/30 dark:border-indigo-400/30 shadow-2xl">
+                    <div className="relative overflow-hidden rounded-2xl bg-slate-950/60 backdrop-blur-md border border-amber-200/20 shadow-2xl">
                         {/* Slides */}
                         <div className="flex transition-transform duration-700 ease-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                             {journeySlides.map((slide, index) => (
@@ -169,14 +168,14 @@ export function Sobre() {
                                 >
                                     <motion.div
                                         whileHover={{ scale: 1.05, rotate: 1 }}
-                                        className="mb-4 p-4 bg-indigo-500/30 dark:bg-indigo-400/40 rounded-full" 
+                                        className="mb-4 p-4 bg-amber-300/20 rounded-full" 
                                     >
-                                        <slide.icon size={48} className="text-indigo-200 dark:text-indigo-200" /> 
+                                        <slide.icon size={48} className="text-amber-100" /> 
                                     </motion.div>
-                                    <h4 className="text-xl font-bold text-white dark:text-white mb-4"> 
+                                    <h4 className="text-xl font-bold text-white mb-4"> 
                                         {slide.title}
                                     </h4>
-                                    <p className="text-gray-100 dark:text-gray-100 max-w-md"> 
+                                    <p className="text-slate-200 max-w-md"> 
                                         {slide.desc}
                                     </p>
                                 </motion.div>
@@ -190,8 +189,8 @@ export function Sobre() {
                                     onClick={() => handleDotClick(index)}
                                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
                                         currentSlide === index 
-                                            ? 'bg-indigo-400 scale-125 shadow-lg' 
-                                            : 'bg-gray-300 dark:bg-gray-600 hover:bg-indigo-300 dark:hover:bg-indigo-500'
+                                            ? 'bg-amber-300 scale-125 shadow-lg' 
+                                            : 'bg-slate-500 hover:bg-amber-200'
                                     }`} 
                                     aria-label={`Ir para slide ${index + 1}`}
                                 />
@@ -210,8 +209,8 @@ export function Sobre() {
                 </motion.div>
             </div>
 
-            <div className="absolute bottom-0 left-0 w-full h-20 lg:h-32 bg-gradient-to-t from-indigo-900/90 to-transparent dark:from-indigo-900/95 flex items-end justify-center"> 
-                <div className="w-full h-1 bg-gradient-to-r from-indigo-400 to-blue-400 opacity-80 dark:opacity-90" /> 
+            <div className="absolute bottom-0 left-0 w-full h-20 lg:h-32 bg-gradient-to-t from-[#101827] to-transparent flex items-end justify-center"> 
+                <div className="w-full h-1 bg-gradient-to-r from-amber-300 via-amber-100 to-sky-300 opacity-80" /> 
             </div>
         </section>
     );

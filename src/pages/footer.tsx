@@ -48,12 +48,11 @@ export function Footer() {
 
     return (
         <footer id={id} className="w-full relative py-20 lg:py-32 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/90 via-blue-900/80 to-purple-900/90 dark:from-indigo-900/95 dark:via-blue-900/85 dark:to-purple-900/95" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#05070c] via-[#0b111b] to-[#161f2d]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_24%,rgba(244,167,105,0.16),transparent_34%),radial-gradient(circle_at_16%_82%,rgba(107,171,232,0.12),transparent_42%)]" />
             <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(135deg,_transparent_30%,_rgba(99,102,241,0.1)_30%,_rgba(99,102,241,0.1)_40%,_transparent_40%),linear-gradient(-135deg,_transparent_30%,_rgba(99,102,241,0.1)_30%,_rgba(99,102,241,0.1)_40%,_transparent_40%)] bg-[length:60px_60px]" />
+                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(135deg,_transparent_30%,_rgba(251,191,36,0.1)_30%,_rgba(251,191,36,0.1)_40%,_transparent_40%),linear-gradient(-135deg,_transparent_30%,_rgba(125,211,252,0.1)_30%,_rgba(125,211,252,0.1)_40%,_transparent_40%)] bg-[length:60px_60px]" />
             </div>
-            {/* Overlay Light Mode */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 to-gray-800/90 dark:hidden" />
 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <motion.div
@@ -68,7 +67,7 @@ export function Footer() {
                         <motion.p 
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
-                            className="text-lg text-gray-300 dark:text-gray-300 font-medium"
+                            className="text-lg text-slate-200 font-medium"
                         >
                             {contactSubtitle}
                         </motion.p>
@@ -112,12 +111,12 @@ export function Footer() {
                                     href={social.href} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="group flex justify-center md:justify-start items-center gap-3 px-4 py-3 bg-white/10 dark:bg-white/20 backdrop-blur-md rounded-xl border border-indigo-500/30 dark:border-indigo-400/30 text-white hover:bg-white/20 dark:hover:bg-white/30 font-medium transition-all duration-300 shadow-lg hover:shadow-indigo-500/25 transform hover:scale-105 hover:-translate-y-1 w-full max-w-xs md:max-w-sm text-center md:text-left" // justify-center mobile (centraliza ícone); py-3 (mais compacto); text-center mobile
+                                    className="group flex justify-center md:justify-start items-center gap-3 px-4 py-3 bg-slate-900/60 backdrop-blur-md rounded-xl border border-amber-200/20 text-white hover:bg-slate-800/70 font-medium transition-all duration-300 shadow-lg hover:shadow-amber-500/20 transform hover:scale-105 hover:-translate-y-1 w-full max-w-xs md:max-w-sm text-center md:text-left"
                                     aria-label={social.label}
                                 >
                                     <social.icon 
                                         size={20} 
-                                        className="text-indigo-400 group-hover:text-indigo-300 transition-colors duration-300 flex-shrink-0" 
+                                        className="text-amber-200 group-hover:text-amber-100 transition-colors duration-300 flex-shrink-0" 
                                     />
                                     <span 
                                         className="hidden md:inline whitespace-nowrap truncate max-w-[120px] md:max-w-[150px]" 
@@ -136,10 +135,10 @@ export function Footer() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="flex flex-col lg:flex-row justify-between items-center gap-8 py-8 w-full border-t border-white/10"
+                    className="flex flex-col lg:flex-row justify-between items-center gap-8 py-8 w-full border-t border-amber-200/15"
                 >
                     <motion.p 
-                        className="font-bold text-sm lg:text-lg text-gray-300 dark:text-gray-300 text-center lg:text-left"
+                        className="font-bold text-sm lg:text-lg text-slate-200 text-center lg:text-left"
                         initial={{ scaleX: 0 }}
                         whileInView={{ scaleX: 1 }}
                         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -152,7 +151,7 @@ export function Footer() {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: showTopBtn ? 1 : 0, scale: showTopBtn ? 1 : 0.8 }}
                         transition={{ duration: 0.3 }}
-                        className="p-3 bg-indigo-500/80 rounded-full shadow-lg hover:shadow-indigo-500/50 hover:bg-indigo-400 transition-all duration-300 text-white hidden lg:flex items-center justify-center"
+                        className="p-3 bg-amber-300/85 rounded-full shadow-lg hover:shadow-amber-500/40 hover:bg-amber-200 transition-all duration-300 text-slate-900 hidden lg:flex items-center justify-center"
                         aria-label={language === 'pt-BR' ? "Voltar ao topo" : "Back to top"}
                     >
                         <ArrowUp size={20} />

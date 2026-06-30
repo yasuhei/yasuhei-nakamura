@@ -95,11 +95,11 @@ export function Projetos() {
 
     return (
         <section id={id} className="w-full relative py-20 lg:py-32 overflow-hidden"> 
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-blue-900/70 to-purple-900/80 dark:from-indigo-900/90 dark:via-blue-900/80 dark:to-purple-900/90" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#05070c] via-[#0b111b] to-[#161f2d]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_18%,rgba(244,167,105,0.18),transparent_34%),radial-gradient(circle_at_12%_82%,rgba(107,171,232,0.14),transparent_42%)]" />
             <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,_transparent_30%,_rgba(99,102,241,0.1)_30%,_rgba(99,102,241,0.1)_40%,_transparent_40%),linear-gradient(-45deg,_transparent_30%,_rgba(99,102,241,0.1)_30%,_rgba(99,102,241,0.1)_40%,_transparent_40%)] bg-[length:40px_40px]" />
+                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,_transparent_30%,_rgba(251,191,36,0.12)_30%,_rgba(251,191,36,0.12)_40%,_transparent_40%),linear-gradient(-45deg,_transparent_30%,_rgba(125,211,252,0.12)_30%,_rgba(125,211,252,0.12)_40%,_transparent_40%)] bg-[length:40px_40px]" />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 to-white/90 dark:hidden" />
 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <motion.div
@@ -119,8 +119,8 @@ export function Projetos() {
                             whileHover={{ scale: 1.05, y: -2 }}
                             className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
                                 filter === key
-                                    ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25'
-                                    : 'bg-white/10 dark:bg-white/20 text-gray-300 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-white/30 border border-white/20'
+                                    ? 'bg-amber-300 text-slate-900 shadow-lg shadow-amber-500/20'
+                                    : 'bg-slate-900/60 text-slate-200 hover:bg-slate-800/70 border border-amber-200/20'
                             }`}
                         >
                             <Filter size={16} />
@@ -146,7 +146,7 @@ export function Projetos() {
                                 y: -10, 
                                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' 
                             }}
-                            className="group relative overflow-hidden rounded-2xl bg-gray-900/80 dark:bg-gray-900/90 backdrop-blur-md border border-indigo-500/30 dark:border-indigo-400/30 shadow-xl hover:shadow-indigo-500/25 transition-all duration-500 h-auto" // h-auto para variar heights
+                            className="group relative overflow-hidden rounded-2xl bg-slate-950/60 backdrop-blur-md border border-amber-200/20 shadow-xl hover:shadow-amber-500/20 transition-all duration-500 h-auto"
                         >
                             <div className="relative">
                                 <img 
@@ -165,7 +165,7 @@ export function Projetos() {
                                             href={project.linkGit} 
                                             target="_blank" 
                                             rel="noopener noreferrer"
-                                            className="p-3 bg-indigo-500/80 rounded-full text-white hover:bg-indigo-400 transition-all"
+                                            className="p-3 bg-amber-300/85 rounded-full text-slate-900 hover:bg-amber-200 transition-all"
                                             aria-label={`Ver código no GitHub de ${project.descricao}`}
                                         >
                                             <Github size={20} />
@@ -187,13 +187,13 @@ export function Projetos() {
 
                             <div className="p-6">
                                 <h3 className="text-xl font-bold text-white mb-2">{project.descricao}</h3>
-                                <p className="text-gray-300 dark:text-gray-300 mb-4 leading-relaxed">{project.texto}</p>
+                                <p className="text-slate-200 mb-4 leading-relaxed">{project.texto}</p>
                                 
                                 <div className="flex flex-wrap gap-2 mb-4">
                                     {project.techs.map((tech, i) => (
                                         <span 
                                             key={i} 
-                                            className="px-3 py-1 bg-indigo-500/20 text-indigo-200 rounded-full text-sm font-medium"
+                                            className="px-3 py-1 bg-amber-300/15 text-amber-100 rounded-full text-sm font-medium border border-amber-200/20"
                                         >
                                             {tech}
                                         </span>
@@ -208,7 +208,7 @@ export function Projetos() {
                     <motion.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
-                        className="text-center text-gray-400 dark:text-gray-500 mt-8 col-span-full"
+                        className="text-center text-slate-300 mt-8 col-span-full"
                     >
                         {language === 'pt-BR' ? 'Nenhum projeto nesta categoria.' : 'No projects in this category.'}
                     </motion.p>
