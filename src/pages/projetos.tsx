@@ -55,10 +55,10 @@ export function Projetos() {
         },
         {
             img: ArenaFC,
-            descricao: 'Arena FC',
+            descricao: 'Sem Panela FC',
             texto: projetosArray[4]?.paragrafo || '',
             linkGit: 'https://github.com/yasuhei/arena-fc',
-            linkDemo: '',
+            linkDemo: 'https://sem-panela-fc.vercel.app/',
             category: 'frontend',
             techs: ['React', 'TypeScript', 'Tailwind'],
         },

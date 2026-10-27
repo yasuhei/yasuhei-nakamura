@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion"; 
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/navegadorContext";
 import { idiomaBr, idiomaEn } from "../Utils/translate";
 import { MenuIcon, XIcon } from "lucide-react";
 
 export function Header() {
-    const [activeLink, setActiveLink] = useState('');
+    const [activeLink, setActiveLink] = useState('home');
     const [modalOpen, setModalOpen] = useState(false);
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? idiomaBr : idiomaEn;
@@ -35,6 +35,7 @@ export function Header() {
         };
 
         window.addEventListener('scroll', handleScroll);
+        handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, [sectionIds]);
 
@@ -92,45 +93,50 @@ export function Header() {
 
     return (
         <header className="terminal-navigation fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-md shadow-lg shadow-black/30 transition-all duration-300 border-b border-white/10">
-            <div className="w-full py-4 px-[3%] lg:px-0"> 
-                <div className="lg:w-full flex justify-around items-center">
+            <div className="terminal-navigation-inner">
+                <div className="terminal-navigation-row">
                     <motion.a
                         href="#home"
-                        whileHover={{ scale: 1.05 }} 
-                        className="text-amber-300 font-sans text-base lg:text-2xl font-bold"
-                        onClick={() => handleClick('home')} 
+                        whileHover={{ y: -1 }}
+                        className="terminal-brand"
+                        onClick={() => handleClick('home')}
                     >
-                        {"</"} <span className="text-slate-100 font-serif"> Yasuhei Nakamura </span> {"/>"} 
+                        <span className="terminal-brand-mark" aria-hidden="true">YN</span>
+                        <span className="terminal-brand-copy">
+                            <span className="terminal-brand-name">Yasuhei Nakamura</span>
+                            <span className="terminal-brand-path">portfolio://dev</span>
+                        </span>
                     </motion.a>
 
-                    {/* Navegação desktop */}
-                    <ul className="hidden lg:flex justify-around items-center gap-6">
+                    <nav className="hidden lg:block" aria-label="Navegação principal">
+                    <ul className="terminal-nav-list">
                         {navItems.map((item) => (
                             <li key={item.id}>
                                 <motion.a
                                     href={`#${item.id}`}
                                     onClick={(e) => { e.preventDefault(); handleClick(item.id); }}
-                                    className={`text-slate-100 font-medium hover:text-amber-300 transition-colors duration-200 ${
-                                        activeLink.toLowerCase() === item.id.toLowerCase() ? 'text-amber-300' : ''
+                                    aria-current={activeLink.toLowerCase() === item.id.toLowerCase() ? 'location' : undefined}
+                                    className={`terminal-nav-link ${
+                                        activeLink.toLowerCase() === item.id.toLowerCase() ? 'is-active' : ''
                                     }`}
-                                    whileHover={{ y: -2 }} 
+                                    whileHover={{ y: -1 }}
                                 >
                                     {item.label}
                                 </motion.a>
                             </li>
                         ))}
                     </ul>
+                    </nav>
 
-                    {/* Botão hambúrguer para mobile */}
-                    <div className="lg:hidden flex items-center gap-4">
+                    <div className="terminal-menu-toggle lg:hidden">
                         <button
                             onClick={() => openModal(!modalOpen)}
-                            className="text-amber-300 focus:outline-none hover:scale-110 transition-transform"
-                            aria-label={modalOpen ? "Fechar menu" : "Abrir menu"} 
+                            className="terminal-menu-button"
+                            aria-label={modalOpen ? "Fechar menu" : "Abrir menu"}
                             aria-expanded={modalOpen}
                             aria-controls="mobile-menu"
                         >
-                            {modalOpen ? <XIcon size={24} /> : <MenuIcon size={24} />} 
+                            {modalOpen ? <XIcon size={20} /> : <MenuIcon size={20} />}
                         </button>
                     </div>
                 </div>
@@ -142,33 +148,38 @@ export function Header() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="fixed inset-0 bg-black/50 lg:hidden z-40"
+                                className="terminal-menu-overlay fixed inset-0 bg-black/50 lg:hidden z-40"
                                 onClick={() => openModal(false)} 
                             />
-                            <motion.ul
+                            <motion.nav
                                 id="mobile-menu"
+                                aria-label="Navegação principal"
                                 variants={modalVariants}
                                 initial="hidden"
                                 animate="visible"
                                 exit="exit"
                                 transition={{ duration: 0.3 }}
-                                className="fixed top-16 right-0 lg:hidden flex flex-col gap-2 px-5 py-4 bg-slate-950/95 backdrop-blur-md w-64 h-[calc(100dvh-4rem)] shadow-lg shadow-black/40 border-l border-white/10 z-50 overflow-y-auto"
+                                className="terminal-mobile-menu fixed top-16 right-0 lg:hidden bg-slate-950/95 backdrop-blur-md shadow-lg shadow-black/40 border-l border-white/10 z-50 overflow-y-auto"
                             >
-                                {navItems.map((item) => (
+                                <ul>
+                                {navItems.map((item, index) => (
                                     <li key={item.id}>
                                         <motion.a
                                             href={`#${item.id}`}
                                             onClick={(e) => { e.preventDefault(); handleClick(item.id); }}
-                                            className={`text-slate-100 font-medium py-4 px-2 hover:text-amber-300 transition-colors block ${
-                                                activeLink.toLowerCase() === item.id.toLowerCase() ? 'text-amber-300' : ''
+                                            aria-current={activeLink.toLowerCase() === item.id.toLowerCase() ? 'location' : undefined}
+                                            className={`terminal-mobile-link ${
+                                                activeLink.toLowerCase() === item.id.toLowerCase() ? 'is-active' : ''
                                             }`}
                                             whileHover={{ x: 5 }}
                                         >
+                                            <span className="terminal-mobile-index">{String(index + 1).padStart(2, '0')}</span>
                                             {item.label}
                                         </motion.a>
                                     </li>
                                 ))}
-                            </motion.ul>
+                                </ul>
+                            </motion.nav>
                         </>
                     )}
                 </AnimatePresence>

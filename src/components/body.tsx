@@ -1,10 +1,10 @@
 import { motion, Variants } from 'framer-motion';
+import { CalendarIcon, CodeIcon, DownloadIcon } from 'lucide-react';
 import { bodyBr, bodyEn } from '../Utils/translate';
-import pdf from '../assets/pdf/Yasuhei_Nakamura.pdf';
-import pdfEn from '../assets/pdf/Yasuhei_Nakamura_-_FEng.pdf';
-import { useLanguage } from '../context/navegadorContext';
-import { DownloadIcon, CodeIcon, CalendarIcon } from 'lucide-react'; 
 import ProfilePhoto from '../assets/me.jpeg';
+import pdf from '../assets/pdf/CV_Yasuhei_Nakamura_pt.pdf';
+import pdfEn from '../assets/pdf/Yasuhei_Nakamura_CV_English.pdf';
+import { useLanguage } from '../context/navegadorContext';
 
 export function Body() {
     const language = useLanguage();
