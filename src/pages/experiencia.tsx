@@ -30,12 +30,6 @@ export function Experiencia() {
 
     return (
         <section id={ID} className="w-full relative py-20 lg:py-32 overflow-hidden"> 
-            <div className="absolute inset-0 bg-gradient-to-br from-[#05070c] via-[#0b111b] to-[#161f2d]" />
-            <div className="absolute inset-0 bg-gradient-to-tl from-amber-300/10 via-transparent to-sky-300/10" />
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(135deg,_transparent_30%,_rgba(251,191,36,0.12)_30%,_rgba(251,191,36,0.12)_40%,_transparent_40%),linear-gradient(-135deg,_transparent_30%,_rgba(125,211,252,0.12)_30%,_rgba(125,211,252,0.12)_40%,_transparent_40%)] bg-[length:56px_56px]" />
-            </div>
-
             <div className="container mx-auto px-6 max-w-6xl relative z-10">
                 <motion.div
                     variants={itemVariants}

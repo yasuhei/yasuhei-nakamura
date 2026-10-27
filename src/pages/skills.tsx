@@ -49,9 +49,6 @@ export function Skills() {
 
     return (
         <section id="skills" className="w-full relative py-20 lg:py-32 overflow-hidden"> 
-            <div className="absolute inset-0 bg-gradient-to-br from-[#05070c] via-[#0b111b] to-[#161f2d]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_20%,rgba(244,167,105,0.18),transparent_35%),radial-gradient(circle_at_18%_82%,rgba(107,171,232,0.14),transparent_44%)]" />
-            
             {/* Animated particles */}
             <div className="absolute inset-0 opacity-20">
                 {particles.map((particle, i) => (
@@ -75,10 +72,6 @@ export function Skills() {
                         }}
                     />
                 ))}
-            </div>
-
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,_transparent_30%,_rgba(251,191,36,0.12)_30%,_rgba(251,191,36,0.12)_40%,_transparent_40%),linear-gradient(-45deg,_transparent_30%,_rgba(125,211,252,0.12)_30%,_rgba(125,211,252,0.12)_40%,_transparent_40%)] bg-[length:40px_40px]" />
             </div>
 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">

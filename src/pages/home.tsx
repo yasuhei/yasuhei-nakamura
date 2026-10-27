@@ -5,10 +5,12 @@ import { Footer } from "./footer";
 import { Projetos } from "./projetos";
 import { Skills } from "./skills";
 import { Sobre } from "./sobre";
+import { TerminalBackground } from "../components/terminalBackground";
 
 export function Home() {
     return (
         <>
+        <TerminalBackground />
         <section className="flex flex-col items-center min-h-screen">
             <Header />
             <Body />

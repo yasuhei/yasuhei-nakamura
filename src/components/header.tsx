@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion"; 
 import { useLanguage } from "../context/navegadorContext";
 import { idiomaBr, idiomaEn } from "../Utils/translate";
@@ -9,9 +9,12 @@ export function Header() {
     const [modalOpen, setModalOpen] = useState(false);
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? idiomaBr : idiomaEn;
-    const sectionIds = language === 'pt-BR'
-        ? ['sobre', 'skills', 'projetos', 'experiência', 'contato']
-        : ['about', 'skills', 'projects', 'experience', 'contact'];
+    const sectionIds = useMemo(
+        () => language === 'pt-BR'
+            ? ['sobre', 'skills', 'projetos', 'experiência', 'contato']
+            : ['about', 'skills', 'projects', 'experience', 'contact'],
+        [language]
+    );
     const navItems = languageArray.map((label, index) => ({
         label,
         id: sectionIds[index]
@@ -88,7 +91,7 @@ export function Header() {
     };
 
     return (
-        <header className="fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-md shadow-lg shadow-black/30 transition-all duration-300 border-b border-white/10">
+        <header className="terminal-navigation fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-md shadow-lg shadow-black/30 transition-all duration-300 border-b border-white/10">
             <div className="w-full py-4 px-[3%] lg:px-0"> 
                 <div className="lg:w-full flex justify-around items-center">
                     <motion.a

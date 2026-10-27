@@ -6,6 +6,228 @@
   min-width: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050505;
+  color: #e7e5e4;
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+}
+
+.font-sans,
+.font-serif {
+  font-family: "IBM Plex Mono", "Courier New", monospace !important;
+}
+
+#root {
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+.terminal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(116, 10, 25, 0.16), transparent 55%),
+    #050505;
+}
+
+.terminal-backdrop::before,
+.terminal-backdrop::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.terminal-backdrop::before {
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 4px 4px, 4px 4px;
+}
+
+.terminal-backdrop::after {
+  opacity: 0.24;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(0, 0, 0, 0.55) 4px
+  );
+}
+
+.terminal-pixel {
+  position: absolute;
+  display: block;
+  background: #383838;
+  opacity: 0.28;
+  animation-name: terminal-pixel-float;
+  animation-timing-function: steps(4, end);
+  animation-iteration-count: infinite;
+}
+
+@keyframes terminal-pixel-float {
+  0%, 100% {
+    opacity: 0.12;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.42;
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+.terminal-hero,
+section,
+footer {
+  z-index: 1;
+}
+
+.terminal-heading {
+  color: #e7e5e4;
+  font-family: "Silkscreen", "IBM Plex Mono", monospace;
+  letter-spacing: 0.02em;
+  text-shadow: 2px 2px 0 rgba(239, 45, 67, 0.35);
+}
+
+.terminal-heading::before {
+  margin-right: 0.55em;
+  color: #ef2d43;
+  content: ">";
+}
+
+.terminal-heading::after {
+  display: block;
+  width: min(100%, 36rem);
+  height: 1px;
+  margin: 0.7rem auto 0;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(239, 45, 67, 0.65) 0,
+    rgba(239, 45, 67, 0.65) 3px,
+    transparent 3px,
+    transparent 7px
+  );
+  content: "";
+}
+
+.terminal-hero-title {
+  font-family: "Silkscreen", "IBM Plex Mono", monospace;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 1.25;
+  text-shadow: 3px 3px 0 rgba(239, 45, 67, 0.28);
+}
+
+.terminal-image-glow {
+  background-image: linear-gradient(
+    90deg,
+    rgba(239, 45, 67, 0.3),
+    rgba(239, 45, 67, 0.12),
+    rgba(239, 45, 67, 0.25)
+  ) !important;
+}
+
+.terminal-hero-title::after {
+  display: inline-block;
+  width: 0.12em;
+  height: 0.82em;
+  margin-left: 0.18em;
+  background: #ef2d43;
+  content: "";
+  vertical-align: -0.02em;
+  animation: terminal-cursor 1s steps(2, start) infinite;
+}
+
+@keyframes terminal-cursor {
+  to {
+    visibility: hidden;
+  }
+}
+
+header {
+  border-bottom-color: rgba(239, 45, 67, 0.42) !important;
+  background-color: rgba(5, 5, 5, 0.88) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+header.terminal-navigation {
+  display: flex;
+  justify-content: center;
+  border-bottom-style: dashed !important;
+}
+
+header.terminal-navigation > div {
+  width: 100%;
+  max-width: 1200px;
+}
+
+header.terminal-navigation ul > li > a {
+  font-size: 0.75rem;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+[class*="text-amber-"],
+[class*="text-sky-"] {
+  color: #ef4658 !important;
+}
+
+[class*="border-amber-"],
+[class*="border-sky-"] {
+  border-color: rgba(239, 45, 67, 0.42) !important;
+  border-style: dashed !important;
+}
+
+[class*="bg-amber-"] {
+  background-color: rgba(239, 45, 67, 0.18) !important;
+}
+
+[class*="bg-slate-950/"],
+[class*="bg-slate-900/"],
+[class*="bg-slate-800/"] {
+  background-color: rgba(8, 8, 8, 0.88) !important;
+}
+
+[class*="rounded-xl"],
+[class*="rounded-2xl"],
+[class*="rounded-lg"] {
+  border-radius: 2px !important;
+}
+
+a,
+button {
+  transition-timing-function: steps(3, end);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px dashed #ef4658;
+  outline-offset: 4px;
+}
+
+::selection {
+  color: #050505;
+  background: #ef4658;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 .scrollbar::-webkit-scrollbar {
   width: 8px !important; /* Largura da barra de rolagem */
 }

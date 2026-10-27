@@ -3,7 +3,7 @@ import { useLanguage } from '../context/navegadorContext';
 import Selfie from '../assets/me.jpeg';
 import { Mail, Github, Linkedin, Code2, Award, Users } from 'lucide-react'; 
 import { sobreBr, sobreEn } from '../Utils/translate';
-import { motion, useScroll, useTransform, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export function Sobre() {
     const language = useLanguage();
@@ -37,9 +37,6 @@ export function Sobre() {
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
     };
 
-    const { scrollYProgress } = useScroll();
-    const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -20]);
-
     const [currentSlide, setCurrentSlide] = useState(0);
     const slideInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -58,15 +55,6 @@ export function Sobre() {
 
     return (
         <section id={id} className="w-full relative py-20 lg:py-32 overflow-hidden">
-            <motion.div 
-                style={{ y: backgroundY }}
-                className="absolute inset-0 bg-gradient-to-br from-[#05070c] via-[#0b111b] to-[#161f2d]"
-            />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_24%,rgba(244,167,105,0.18),transparent_34%),radial-gradient(circle_at_14%_80%,rgba(107,171,232,0.14),transparent_42%)]" />
-            <div className="absolute inset-0 opacity-10"> 
-                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(135deg,_transparent_30%,_rgba(251,191,36,0.14)_30%,_rgba(251,191,36,0.14)_40%,_transparent_40%),linear-gradient(-135deg,_transparent_32%,_rgba(125,211,252,0.12)_32%,_rgba(125,211,252,0.12)_42%,_transparent_42%)] bg-[length:60px_60px]" />
-            </div>
-
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <motion.div 
                     variants={itemVariants}
