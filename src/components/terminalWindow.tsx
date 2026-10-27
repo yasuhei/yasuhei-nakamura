@@ -12,11 +12,11 @@ const linesBr: Line[] = [
     { kind: 'command', text: 'cat role.txt' },
     { kind: 'output', text: 'desenvolvedor full-stack' },
     { kind: 'command', text: 'ls stack/' },
-    { kind: 'output', text: 'react  angular  typescript  node' },
+    { kind: 'output', text: 'angular  node.js  typescript  java' },
     { kind: 'command', text: 'uptime --experience' },
-    { kind: 'output', text: '4+ anos construindo para a web' },
+    { kind: 'output', text: '5+ anos construindo para a web' },
     { kind: 'command', text: 'echo $STATUS' },
-    { kind: 'output', text: 'aberto a novos projetos_' },
+    { kind: 'output', text: 'pós em Eng. de Software com Java e IA_' },
 ];
 
 const linesEn: Line[] = [
@@ -25,11 +25,11 @@ const linesEn: Line[] = [
     { kind: 'command', text: 'cat role.txt' },
     { kind: 'output', text: 'full-stack developer' },
     { kind: 'command', text: 'ls stack/' },
-    { kind: 'output', text: 'react  angular  typescript  node' },
+    { kind: 'output', text: 'angular  node.js  typescript  java' },
     { kind: 'command', text: 'uptime --experience' },
-    { kind: 'output', text: '4+ years building for the web' },
+    { kind: 'output', text: '5+ years building for the web' },
     { kind: 'command', text: 'echo $STATUS' },
-    { kind: 'output', text: 'open to new projects_' },
+    { kind: 'output', text: 'postgrad in SW Eng. with Java & AI_' },
 ];
 
 const TYPE_MS = 38;

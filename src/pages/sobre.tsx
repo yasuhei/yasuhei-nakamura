@@ -14,14 +14,14 @@ export function Sobre() {
 
     const journeySlides = language === 'pt-BR' 
         ? [
-            { title: "Início da Jornada", desc: "Comecei como dev frontend em 2019, focando em React e UX.", icon: Code2 },
-            { title: "Especialização Full-Stack", desc: "Evoluí para full-stack com NestJS e Angular, liderando projetos em equipes.", icon: Award },
-            { title: "Impacto e Colaboração", desc: "Atuo construindo soluções inovadoras, sempre em colaboração com minha equipe.", icon: Users }
+            { title: "Início da Jornada", desc: "Comecei como dev front-end em 2021, criando interfaces a partir do Figma e landing pages.", icon: Code2 },
+            { title: "Especialização Full-Stack", desc: "Evoluí para fullstack com Angular, Node.js e APIs REST em projetos do setor financeiro.", icon: Award },
+            { title: "Evolução Contínua", desc: "Estudando Java, CI/CD, Docker e Kubernetes na pós-graduação em Engenharia de Software com Java e IA.", icon: Users }
           ]
         : [
-            { title: "Journey Start", desc: "Started as frontend dev in 2019, focusing on React and UX.", icon: Code2 },
-            { title: "Full-Stack Expertise", desc: "Evolved to full-stack with NestJS and Angular, leading team projects.", icon: Award },
-            { title: "Impact & Collaboration", desc: "Building innovative solutions in close collaboration with my team.", icon: Users }
+            { title: "Journey Start", desc: "Started as a front-end dev in 2021, building Figma-based interfaces and landing pages.", icon: Code2 },
+            { title: "Full-Stack Expertise", desc: "Grew into fullstack with Angular, Node.js and REST APIs on financial-sector projects.", icon: Award },
+            { title: "Continuous Growth", desc: "Studying Java, CI/CD, Docker and Kubernetes in a postgraduate program in Software Engineering with Java and AI.", icon: Users }
           ];
 
     const containerVariants: Variants  = {

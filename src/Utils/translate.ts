@@ -16,7 +16,7 @@ export const bodyEn = [{
 }]
 export const sobreBr = [{
     titulo: "Sobre Mim",
-    paragrafo: "Desenvolvedor fullstack com mais de 3 anos de experiência em aplicações web, principalmente no setor financeiro. Tenho forte atuação em frontend com React e Angular, além de experiência com backend em Node.js.Busco sempre desenvolver soluções escaláveis, com foco em performance e arquitetura bem estruturada.",
+    paragrafo: "Desenvolvedor Fullstack com experiência em projetos de médio e grande porte, atuando principalmente com Angular, Node.js e APIs REST no setor financeiro. Foco em código limpo, testes automatizados, performance e boas práticas, com vivência em ambientes ágeis e colaboração ativa com times multidisciplinares. Tenho conhecimentos em Java, CI/CD, Docker e Kubernetes aplicados em projetos práticos e atualmente curso pós-graduação em Engenharia de Software com Java e IA.",
     journey: [
         { title: "Início da Jornada", desc: "Descrição...", icon: "Code2" }, // Use string para icon name se preferir
         // ...
@@ -24,63 +24,72 @@ export const sobreBr = [{
 }]
 export const sobreEn = [{
     titulo: 'get to know me',
-    paragrafo: "“I’m a Fullstack Developer with 4+ years of experience building scalable web applications, mainly in the financial sector. I specialize in frontend development with React and Angular, and also work with backend services using Node.js.I focus on performance, clean architecture, and delivering real-world solutions."
+    paragrafo: "Fullstack Developer with experience in mid-size and large projects, working mainly with Angular, Node.js and REST APIs in the financial sector. I focus on clean code, automated testing, performance and best practices, with experience in agile environments and close collaboration with cross-functional teams. I have hands-on knowledge of Java, CI/CD, Docker and Kubernetes in practical projects, and I'm currently pursuing a postgraduate degree in Software Engineering with Java and AI."
 
 }]
 
 export const expBr = [
     {
-        titulo: 'Dev front-end',
-        paragrafo: "Participei do desenvolvimento de um sistema de renegociação de dívidas para o banco Bradesco. Recebemos o endpoint da equipe de backend e implementamos as chamadas no nosso BFF (Backend for Frontend), utilizando o framework Nest.js. Organizamos o código em módulos responsáveis, integrados ao micro-frontend. No lado do frontend, utilizamos Angular, seguindo o design system Fluig, e realizamos testes unitários com Jest. Para garantir a qualidade, implementamos testes automatizados em ferramentas como Bamboo e SonarQube, seguindo metodologias ágeis. Além disso, aplicamos tagueamento e integrações com microserviços.",
+        titulo: 'Desenvolvedor Fullstack',
+        paragrafo: "Desenvolvimento de um sistema de renegociação de dívidas para o Bradesco. Implementação do frontend em Angular e do backend BFF em Node.js, com integração a APIs REST internas e externas. Criação de testes unitários com Jest, versionamento com Bitbucket e atuação em Scrum.",
         mes: 'Ago 2023 - Atual',
         empresa: '7comm informática'
     },
     {
-        titulo: 'Analista de sistemas',
-        paragrafo: "Participei ativamente na criação de um portal dedicado aos colaboradores, integrando APIs tanto externas quanto internas para fornecer uma experiência integrada. Utilizamos práticas avançadas de versionamento no GitHub para um desenvolvimento colaborativo e organizado. Para garantir uma interface de usuário moderna e responsiva, implementamos o Material-UI, aproveitando suas capacidades de design e componentização. O projeto foi desenvolvido utilizando React.js, aproveitando ao máximo as funcionalidades dinâmicas e eficientes da biblioteca. Além disso, aplicamos JavaScript para lógica de programação essencial e Tailwind CSS para estilos customizados e escaláveis, garantindo uma aparência coesa e de fácil manutenção.",
+        titulo: 'Desenvolvedor Fullstack',
+        paragrafo: "Desenvolvimento de aplicações web com React e TypeScript. Integração com APIs externas para consumo de dados geoespaciais (GeoJSON), manipulação e transformação de dados geográficos para visualização em mapas e consumo de fontes públicas, como dados ambientais e de satélite. Versionamento com GitHub.",
+        mes: 'Fev 2025 - Fev 2026',
+        empresa: 'Forest Watch'
+    },
+    {
+        titulo: 'Analista de Sistemas Pleno',
+        paragrafo: "Desenvolvimento de um portal corporativo com Angular, integrado a um backend em Node.js. Modelagem de banco de dados e controle de acessos, com versionamento no GitHub.",
         mes: 'Mai 2023 - Jul 2023 · 3 m',
-        empresa: 'Indorama Ltda.'
+        empresa: 'Indorama Brasil'
     },
     {
-        titulo: 'Dev front-end',
-        paragrafo: "Na Oráculo, participei ativamente do desenvolvimento de um sistema em pleno funcionamento, colaborando com uma equipe composta por dois back-ends, dois front-ends, dois DevOps e um CTO. Trabalhava frequentemente em conjunto com um backend na mesma task. Utilizamos amplamente a AWS para conectar ao banco de dados e outras aplicações. Um dos destaques foi o desenvolvimento de um avançado criador de tarefas, substituindo processos manuais anteriormente realizados em Excel, devido à complexidade das regras de negócio.Além disso, implementamos gráficos para análise de desempenho afetado por manutenções programadas. Mantínhamos reuniões diárias para alinhar nossas atividades. No desenvolvimento do sistema, adotamos tecnologias modernas como React.js, TypeScript e styled-components para assegurar uma interface de usuário eficiente e atualizada. Também integrávamos diversas APIs para melhorar a interação do sistema com outros serviços. Esta versão foca nas tecnologias utilizadas e nos aspectos técnicos do projeto na Oráculo.",
+        titulo: 'Desenvolvedor Front-end Pleno',
+        paragrafo: "Criação de sistemas web e dashboards interativos, com integração a APIs REST. Atuação em ambiente de nuvem AWS.",
         mes: 'Out 2022 - Jul 2023 · 10 m',
-        empresa: 'Oracúlo tech'
+        empresa: 'Oráculo Meteorologia'
     },
     {
-        titulo: 'Dev front-end',
-        paragrafo: "Desenvolvemos um ERP utilizando o poderoso framework Angular, aproveitando as capacidades avançadas de TypeScript e SCSS para garantir uma aplicação robusta e escalável. Implementamos testes automatizados para assegurar a qualidade do software ao longo do desenvolvimento.Além disso, criei um clone personalizado do Trello, adaptando-o às especificidades e regras de negócio da empresa para permitir que os franqueados organizassem suas tarefas de maneira eficiente. Utilizei a biblioteca pdfmake para gerar PDFs personalizados dinamicamente.Para complementar, desenvolvi landing pages utilizando HTML, CSS e JavaScript, proporcionando uma experiência de usuário atraente e interativa.'Esta versão destaca as tecnologias específicas utilizadas em cada parte do projeto, focando nos frameworks e ferramentas relevantes para cada funcionalidade desenvolvida.'",
+        titulo: 'Desenvolvedor Front-end Júnior',
+        paragrafo: "Desenvolvimento de interfaces a partir de protótipos no Figma (UI/UX) e criação de landing pages, com gestão de tarefas em Kanban.",
         mes: 'Out 2021 - Set 2022 · 11 m',
-        empresa: 'Hausz pisos e ambientes'
+        empresa: 'Hausz Pisos e Ambientes'
     },
-
-
 ]
 export const expEn = [
     {
-        titulo: 'Dev front-end',
-        paragrafo: "I participated in the development of a debt renegotiation system for Bradesco bank. We received the endpoint from the backend team and implemented the calls in our BFF (Backend for Frontend), using the Nest.js framework. We organized the code into responsible modules, integrated into the micro-frontend. On the frontend side, we used Angular, following the Fluig design system, and carried out unit tests with Jest. To guarantee quality, we implemented automated tests in tools such as Bamboo and SonarQube, following agile methodologies. In addition, we applied tagging and integrations with microservices.",
+        titulo: 'Fullstack Developer',
+        paragrafo: "Development of a debt renegotiation system for Bradesco. Built the frontend in Angular and the Node.js BFF backend, integrating internal and external REST APIs. Wrote unit tests with Jest, used Bitbucket for versioning and worked in Scrum.",
         mes: 'Aug 2023 - Current',
         empresa: '7comm informática'
-
     },
     {
-        titulo: 'Systems analyst',
-        paragrafo: "I actively participated in the creation of a portal dedicated to employees, integrating both external and internal APIs to provide an integrated experience. We used advanced versioning practices on GitHub for collaborative and organized development. To ensure a modern and responsive user interface, we implemented Material-UI, taking advantage of its design and componentization capabilities. The project was developed using React.js, making the most of the library's dynamic and efficient features. In addition, we applied JavaScript for essential programming logic and Tailwind CSS for customized and scalable styles, ensuring a cohesive and maintainable appearance.",
+        titulo: 'Fullstack Developer',
+        paragrafo: "Development of web applications with React and TypeScript. Integrated external APIs to consume geospatial data (GeoJSON), handled and transformed geographic data for map visualization, and consumed public sources such as environmental and satellite data. Versioning with GitHub.",
+        mes: 'Feb 2025 - Feb 2026',
+        empresa: 'Forest Watch'
+    },
+    {
+        titulo: 'Mid-level Systems Analyst',
+        paragrafo: "Development of a corporate portal with Angular, integrated with a Node.js backend. Database modeling and access control, with versioning on GitHub.",
         mes: 'May 2023 - Jul 2023 - 3 m',
-        empresa: 'Indorama Ltda.'
+        empresa: 'Indorama Brasil'
     },
     {
-        titulo: 'Dev front-end',
-        paragrafo: "At Oráculo, I actively participated in the development of a fully functioning system, collaborating with a team made up of two back-ends, two front-ends, two DevOps and a CTO. I often worked together with a backend on the same task. We made extensive use of AWS to connect to the database and other applications. One of the highlights was the development of an advanced task creator, replacing manual processes previously carried out in Excel, due to the complexity of the business rules.In addition, we implemented graphs to analyze performance affected by scheduled maintenance. We held daily meetings to align our activities. In developing the system, we adopted modern technologies such as React.js, TypeScript and styled-components to ensure an efficient and up-to-date user interface. We also integrated various APIs to improve the system's interaction with other services. This version focuses on the technologies used and the technical aspects of the project at Oráculo.",
+        titulo: 'Mid-level Front-end Developer',
+        paragrafo: "Built web systems and interactive dashboards, integrating REST APIs. Worked in an AWS cloud environment.",
         mes: 'Oct 2022 - Jul 2023 - 10 m',
-        empresa: 'Oracúlo tech'
+        empresa: 'Oráculo Meteorologia'
     },
     {
-        titulo: 'Dev front-end',
-        paragrafo: "We developed an ERP using the powerful Angular framework, taking advantage of the advanced capabilities of TypeScript and SCSS to ensure a robust and scalable application. We implemented automated tests to ensure the quality of the software throughout development. In addition, I created a custom Trello clone, adapting it to the specifics and rules of our company.",
+        titulo: 'Junior Front-end Developer',
+        paragrafo: "Developed interfaces from Figma designs (UI/UX) and built landing pages, managing tasks with Kanban.",
         mes: 'Oct 2021 - Sep 2022 - 11 m',
-        empresa: 'Hausz pisos e ambientes'
+        empresa: 'Hausz Pisos e Ambientes'
     }
 ]
 
@@ -98,7 +107,7 @@ export const projBr = [
         paragrafo: "Este projeto foi desenvolvido com base em um wireframe inicial detalhado, utilizando tecnologias modernas como ReactJS para a construção da interface do usuário e Tailwind CSS para estilização responsiva e eficiente. Além disso, foi implementado o Axios, uma biblioteca JavaScript, para realizar requisições HTTP de forma simplificada e eficaz à API, permitindo uma integração fluida e segura com os dados necessários. O uso de ReactJS garantiu uma experiência de usuário dinâmica e interativa, aproveitando ao máximo o conceito de componentização para modularizar e reutilizar código.",
     },
     {
-        paragrafo: "Sem Panela FC é uma aplicação web responsiva para organizar partidas e montar times de futebol equilibrados. Permite gerenciar jogadores, avaliar habilidades e distribuir os participantes em equipes balanceadas. Desenvolvido com React, TypeScript e Tailwind CSS.",
+        paragrafo: "Sem Panela FC é uma aplicação web responsiva para organizar partidas e montar times de futebol equilibrados. Permite gerenciar jogadores, avaliar habilidades e distribuir os participantes em equipes balanceadas. Desenvolvido com React, TypeScript e Tailwind CSS no frontend, Node.js + Express e PostgreSQL no backend, com deploy na Vercel.",
     },
 
 ]
@@ -117,7 +126,7 @@ export const projEn = [
         paragrafo: "This project was developed based on a detailed initial wireframe, using modern technologies such as ReactJS to build the user interface and Tailwind CSS for responsive and efficient styling. In addition, Axios, a JavaScript library, was implemented to make simple and effective HTTP requests to the API, enabling smooth and secure integration with the necessary data. The use of ReactJS ensured a dynamic and interactive user experience, taking full advantage of the concept of componentization to modularize and reuse code."
     },
     {
-        paragrafo: "Sem Panela FC is a responsive web app for organizing soccer matches and creating balanced teams. It lets you manage players, rate their skills, and distribute participants across balanced teams. Built with React, TypeScript, and Tailwind CSS.",
+        paragrafo: "Sem Panela FC is a responsive web app for organizing soccer matches and creating balanced teams. It lets you manage players, rate their skills, and distribute participants across balanced teams. Built with React, TypeScript and Tailwind CSS on the frontend, Node.js + Express and PostgreSQL on the backend, deployed on Vercel.",
     },
 
 ]

@@ -15,8 +15,8 @@ export function Body() {
 
 
     const badges = language === 'pt-BR' 
-        ? ["Desenvolvedor Full-Stack", "4+ Anos de Experiência", "Especialista em React/Angular"] 
-        : ["Full-Stack Developer", "4+ Years Experience", "React/Angular Specialist"];
+        ? ["Desenvolvedor Full-Stack", "5+ Anos de Experiência", "Angular • Node.js • Java"] 
+        : ["Full-Stack Developer", "5+ Years Experience", "Angular • Node.js • Java"];
 
     const containerVariants: Variants  = {
         hidden: { opacity: 0 },

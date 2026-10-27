@@ -60,7 +60,7 @@ export function Projetos() {
             linkGit: 'https://github.com/yasuhei/arena-fc',
             linkDemo: 'https://sem-panela-fc.vercel.app/',
             category: 'frontend',
-            techs: ['React', 'TypeScript', 'Tailwind'],
+            techs: ['React', 'TypeScript', 'Tailwind', 'Node.js', 'PostgreSQL'],
         },
     ], [projetosArray]); 
 

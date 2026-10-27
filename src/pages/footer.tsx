@@ -76,10 +76,10 @@ export function Footer() {
                         {[
                             { 
                                 icon: Mail, 
-                                href: "mailto:yasuhei.nakamura@hotmail.com", 
+                                href: "mailto:yasuhei_nakamura@hotmail.com", 
                                 label: 'Email',
                                 text: 'Email', 
-                                fullText: 'yasuhei.nakamura@hotmail.com' 
+                                fullText: 'yasuhei_nakamura@hotmail.com' 
                             },
                             { 
                                 icon: Github, 
