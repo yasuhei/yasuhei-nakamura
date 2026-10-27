@@ -63,25 +63,12 @@ body {
   );
 }
 
-.terminal-pixel {
+.terminal-canvas {
   position: absolute;
-  display: block;
-  background: #383838;
-  opacity: 0.28;
-  animation-name: terminal-pixel-float;
-  animation-timing-function: steps(4, end);
-  animation-iteration-count: infinite;
-}
-
-@keyframes terminal-pixel-float {
-  0%, 100% {
-    opacity: 0.12;
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    opacity: 0.42;
-    transform: translate3d(0, -18px, 0);
-  }
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
 }
 
 .terminal-hero,
