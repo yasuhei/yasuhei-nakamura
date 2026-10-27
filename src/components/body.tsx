@@ -1,7 +1,7 @@
 import { motion, Variants } from 'framer-motion';
 import { CalendarIcon, CodeIcon, DownloadIcon } from 'lucide-react';
 import { bodyBr, bodyEn } from '../Utils/translate';
-import ProfilePhoto from '../assets/me.jpeg';
+import { TerminalWindow } from './terminalWindow';
 import pdf from '../assets/pdf/CV_Yasuhei_Nakamura_pt.pdf';
 import pdfEn from '../assets/pdf/Yasuhei_Nakamura_CV_English.pdf';
 import { useLanguage } from '../context/navegadorContext';
@@ -110,21 +110,7 @@ export function Body() {
                     transition={{ duration: 1, delay: 0.4, ease: 'backOut' }} 
                     className="flex-1 flex justify-center lg:justify-end order-1 lg:order-2 mb-8 lg:mb-0"
                 >
-                    <motion.div
-                        whileHover={{ scale: 1.05, rotate: 2 }}
-                        className="relative"
-                    >
-                        <img 
-                            src={ProfilePhoto} 
-                            alt="Avatar profissional de Yasuhei Nakamura" 
-                            className="w-72 h-72 lg:w-96 lg:h-96 rounded-[2rem] object-cover object-center filter brightness-105 contrast-105 saturate-105 drop-shadow-2xl border-2 border-amber-200/35"
-                        />
-                        <motion.div
-                            className="terminal-image-glow absolute inset-0 rounded-[2rem] bg-gradient-to-r from-amber-400/30 via-orange-300/20 to-sky-400/25 blur-2xl -z-10"
-                            animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                        />
-                    </motion.div>
+                    <TerminalWindow />
                 </motion.div>
             </div>
         </main>

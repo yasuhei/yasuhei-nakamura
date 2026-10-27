@@ -138,6 +138,16 @@ footer {
   }
 }
 
+.terminal-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 2px;
+  background: #ef2d43;
+  vertical-align: text-bottom;
+  animation: terminal-cursor 1s steps(2, start) infinite;
+}
+
 header {
   border-bottom-color: rgba(239, 45, 67, 0.42) !important;
   background-color: rgba(5, 5, 5, 0.88) !important;
