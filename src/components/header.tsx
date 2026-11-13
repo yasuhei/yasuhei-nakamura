@@ -1,12 +1,14 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/navegadorContext";
 import { idiomaBr, idiomaEn } from "../Utils/translate";
 import { MenuIcon, XIcon } from "lucide-react";
+import menuSound from "../assets/menu-select.mp3";
 
 export function Header() {
     const [activeLink, setActiveLink] = useState('home');
     const [modalOpen, setModalOpen] = useState(false);
+    const menuAudioRef = useRef<HTMLAudioElement | null>(null);
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? idiomaBr : idiomaEn;
     const sectionIds = useMemo(
@@ -20,6 +22,12 @@ export function Header() {
         id: sectionIds[index]
     }));
 
+    useEffect(() => {
+        return () => {
+            menuAudioRef.current?.pause();
+            menuAudioRef.current = null;
+        };
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -80,6 +88,24 @@ export function Header() {
         }
     };
 
+    const playMenuSound = () => {
+        if (!menuAudioRef.current) {
+            menuAudioRef.current = new Audio(menuSound);
+            menuAudioRef.current.volume = 0.25;
+        }
+
+        const audio = menuAudioRef.current;
+        audio.pause();
+        audio.currentTime = 0;
+        void audio.play().catch((error: unknown) => {
+            // Autoplay may be blocked; rapid hovers can interrupt pending playback.
+            if (!(error instanceof DOMException &&
+                (error.name === 'NotAllowedError' || error.name === 'AbortError'))) {
+                console.error('Não foi possível reproduzir o som de navegação.', error);
+            }
+        });
+    };
+
     const openModal = (value: boolean) => {
         setModalOpen(value);
     };
@@ -120,6 +146,8 @@ export function Header() {
                                         activeLink.toLowerCase() === item.id.toLowerCase() ? 'is-active' : ''
                                     }`}
                                     whileHover={{ y: -1 }}
+                                    onHoverStart={playMenuSound}
+                                    onFocus={playMenuSound}
                                 >
                                     {item.label}
                                 </motion.a>
@@ -172,6 +200,8 @@ export function Header() {
                                                 activeLink.toLowerCase() === item.id.toLowerCase() ? 'is-active' : ''
                                             }`}
                                             whileHover={{ x: 5 }}
+                                            onHoverStart={playMenuSound}
+                                            onFocus={playMenuSound}
                                         >
                                             <span className="terminal-mobile-index">{String(index + 1).padStart(2, '0')}</span>
                                             {item.label}

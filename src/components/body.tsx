@@ -1,18 +1,45 @@
+import { useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { CalendarIcon, CodeIcon, DownloadIcon } from 'lucide-react';
 import { bodyBr, bodyEn } from '../Utils/translate';
 import { TerminalWindow } from './terminalWindow';
+import characterArt from '../assets/vice-city-character.png';
+import missionPassedSound from '../assets/mission-passed.mp3';
 import pdf from '../assets/pdf/CV_Yasuhei_Nakamura_pt.pdf';
 import pdfEn from '../assets/pdf/Yasuhei_Nakamura_CV_English.pdf';
 import { useLanguage } from '../context/navegadorContext';
 
 export function Body() {
+    const downloadAudioRef = useRef<HTMLAudioElement | null>(null);
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? bodyBr : bodyEn;
     const curric = language === 'pt-BR' ? pdf : pdfEn;
 
     const { titulo, paragrafo, paragrafo2, curriculo } = languageArray[0];
 
+    useEffect(() => {
+        return () => {
+            downloadAudioRef.current?.pause();
+            downloadAudioRef.current = null;
+        };
+    }, []);
+
+    const playDownloadSound = () => {
+        if (!downloadAudioRef.current) {
+            downloadAudioRef.current = new Audio(missionPassedSound);
+            downloadAudioRef.current.volume = 0.25;
+        }
+
+        const audio = downloadAudioRef.current;
+        audio.pause();
+        audio.currentTime = 0;
+        void audio.play().catch((error: unknown) => {
+            // Repeated clicks can interrupt pending playback.
+            if (!(error instanceof DOMException && error.name === 'AbortError')) {
+                console.error('Não foi possível reproduzir o som de download do currículo.', error);
+            }
+        });
+    };
 
     const badges = language === 'pt-BR' 
         ? ["Desenvolvedor Full-Stack", "5+ Anos de Experiência", "Angular • Node.js • Java"] 
@@ -87,6 +114,7 @@ export function Body() {
                     <motion.a
                         variants={itemVariants}
                         href={curric}
+                        onClick={playDownloadSound}
                         download={language === 'pt-BR' ? "Yasuhei_Nakamura.pdf" : "Yasuhei_Nakamura_FEng.pdf"}
                         className="group inline-flex items-center px-8 py-4 bg-amber-400/20 backdrop-blur-md border border-amber-200/35 text-amber-50 hover:bg-amber-300/25 font-bold rounded-xl transition-all duration-500 ease-out shadow-2xl hover:shadow-amber-500/20 transform hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                         aria-label={`Baixar currículo em ${language === 'pt-BR' ? 'português' : 'inglês'}`}
@@ -108,9 +136,29 @@ export function Body() {
                     initial={{ opacity: 0, rotate: -5, scale: 0.9 }}
                     animate={{ opacity: 1, rotate: 0, scale: 1 }}
                     transition={{ duration: 1, delay: 0.4, ease: 'backOut' }} 
-                    className="flex-1 flex justify-center lg:justify-end order-1 lg:order-2 mb-8 lg:mb-0"
+                    className="hero-visual flex-1 flex flex-col justify-center order-1 lg:order-2 mb-8 lg:mb-0"
                 >
-                    <TerminalWindow />
+                    <figure className="hero-character-card">
+                        <img
+                            src={characterArt}
+                            alt={language === 'pt-BR'
+                                ? 'Retrato ilustrado de Yasuhei Nakamura em uma cidade tropical ao pôr do sol'
+                                : 'Illustrated portrait of Yasuhei Nakamura in a tropical city at sunset'}
+                            className="hero-character-image"
+                            fetchPriority="high"
+                        />
+                        <div className="hero-character-topline" aria-hidden="true">
+                            <span>VICE CITY // PORTFOLIO</span>
+                            <span>01 — 26</span>
+                        </div>
+                        <figcaption className="hero-character-caption">
+                            <span>YASUHEI NAKAMURA</span>
+                            <span>{language === 'pt-BR' ? 'PERSONAGEM PRINCIPAL · DEV FULL-STACK' : 'PLAYER ONE · FULL-STACK DEV'}</span>
+                        </figcaption>
+                    </figure>
+                    <div className="hero-terminal-console">
+                        <TerminalWindow />
+                    </div>
                 </motion.div>
             </div>
         </main>

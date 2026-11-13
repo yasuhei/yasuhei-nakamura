@@ -1,6 +1,6 @@
 import {  useState, useEffect, useRef } from 'react'; 
 import { useLanguage } from '../context/navegadorContext';
-import Selfie from '../assets/me.jpeg';
+import Selfie from '../assets/vice-city-character.png';
 import { Mail, Github, Linkedin, Code2, Award, Users } from 'lucide-react'; 
 import { sobreBr, sobreEn } from '../Utils/translate';
 import { motion, Variants } from 'framer-motion';
@@ -81,8 +81,8 @@ export function Sobre() {
                         <div className="relative group">
                             <img 
                                 src={Selfie} 
-                                alt="Foto profissional de Yasuhei Nakamura" 
-                                className="w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-amber-200/50 shadow-2xl drop-shadow-lg"
+                                alt="Retrato ilustrado de Yasuhei Nakamura com luzes de uma cidade tropical ao pôr do sol"
+                                className="about-character-portrait w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-amber-200/50 shadow-2xl drop-shadow-lg"
                                 loading="lazy"
                             />
                             <motion.div
