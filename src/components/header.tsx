@@ -4,10 +4,12 @@ import { useLanguage } from "../context/navegadorContext";
 import { idiomaBr, idiomaEn } from "../Utils/translate";
 import { MenuIcon, XIcon } from "lucide-react";
 import menuSound from "../assets/menu-select.mp3";
+import { useSectionLink } from "./useSectionLink";
 
 export function Header() {
     const [activeLink, setActiveLink] = useState('home');
     const [modalOpen, setModalOpen] = useState(false);
+    const followSectionLink = useSectionLink();
     const menuAudioRef = useRef<HTMLAudioElement | null>(null);
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? idiomaBr : idiomaEn;
@@ -32,13 +34,20 @@ export function Header() {
     useEffect(() => {
         const handleScroll = () => {
             const sections = ['home', ...sectionIds];
-            let current = '';
+            let current = 'home';
+            let nearest = -Infinity;
             sections.forEach(section => {
                 const element = document.getElementById(section);
-                if (element && element.getBoundingClientRect().top <= 100) {
+                if (!element) return;
+                const top = element.getBoundingClientRect().top;
+                if (top <= 100 && top > nearest) {
+                    nearest = top;
                     current = section;
                 }
             });
+            if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+                current = sectionIds[sectionIds.length - 1];
+            }
             setActiveLink(current);
         };
 
@@ -79,15 +88,6 @@ export function Header() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const handleClick = (link: string) => {
-        setActiveLink(link);
-        setModalOpen(false);
-        const element = document.getElementById(link);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
     const playMenuSound = () => {
         if (!menuAudioRef.current) {
             menuAudioRef.current = new Audio(menuSound);
@@ -125,7 +125,7 @@ export function Header() {
                         href="#home"
                         whileHover={{ y: -1 }}
                         className="terminal-brand"
-                        onClick={() => handleClick('home')}
+                        onClick={(event) => followSectionLink(event, 'home', () => setModalOpen(false))}
                     >
                         <span className="terminal-brand-mark" aria-hidden="true">YN</span>
                         <span className="terminal-brand-copy">
@@ -140,7 +140,7 @@ export function Header() {
                             <li key={item.id}>
                                 <motion.a
                                     href={`#${item.id}`}
-                                    onClick={(e) => { e.preventDefault(); handleClick(item.id); }}
+                                    onClick={(event) => followSectionLink(event, item.id)}
                                     aria-current={activeLink.toLowerCase() === item.id.toLowerCase() ? 'location' : undefined}
                                     className={`terminal-nav-link ${
                                         activeLink.toLowerCase() === item.id.toLowerCase() ? 'is-active' : ''
@@ -181,6 +181,7 @@ export function Header() {
                             />
                             <motion.nav
                                 id="mobile-menu"
+                                data-lenis-prevent
                                 aria-label="Navegação principal"
                                 variants={modalVariants}
                                 initial="hidden"
@@ -194,7 +195,7 @@ export function Header() {
                                     <li key={item.id}>
                                         <motion.a
                                             href={`#${item.id}`}
-                                            onClick={(e) => { e.preventDefault(); handleClick(item.id); }}
+                                            onClick={(event) => followSectionLink(event, item.id, () => setModalOpen(false))}
                                             aria-current={activeLink.toLowerCase() === item.id.toLowerCase() ? 'location' : undefined}
                                             className={`terminal-mobile-link ${
                                                 activeLink.toLowerCase() === item.id.toLowerCase() ? 'is-active' : ''

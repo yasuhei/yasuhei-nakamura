@@ -1,8 +1,10 @@
-import { useEffect, useRef } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { useEffect, useLayoutEffect, useRef } from 'react';
+import { motion, Variants, useReducedMotion } from 'framer-motion';
+import { gsap } from 'gsap';
 import { CalendarIcon, CodeIcon, DownloadIcon } from 'lucide-react';
 import { bodyBr, bodyEn } from '../Utils/translate';
 import { TerminalWindow } from './terminalWindow';
+import { HeroPortraitLight } from './heroPortraitLight';
 import characterArt from '../assets/vice-city-character.png';
 import missionPassedSound from '../assets/mission-passed.mp3';
 import pdf from '../assets/pdf/CV_Yasuhei_Nakamura_pt.pdf';
@@ -11,11 +13,29 @@ import { useLanguage } from '../context/navegadorContext';
 
 export function Body() {
     const downloadAudioRef = useRef<HTMLAudioElement | null>(null);
+    const visualRef = useRef<HTMLDivElement>(null);
+    const reducedMotion = useReducedMotion();
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? bodyBr : bodyEn;
     const curric = language === 'pt-BR' ? pdf : pdfEn;
 
     const { titulo, paragrafo, paragrafo2, curriculo } = languageArray[0];
+
+    useLayoutEffect(() => {
+        const media = gsap.matchMedia();
+        media.add('(prefers-reduced-motion: no-preference)', () => {
+            gsap.from(visualRef.current, {
+                opacity: 0,
+                rotate: -5,
+                scale: 0.9,
+                duration: 1,
+                delay: 0.4,
+                ease: 'back.out(1.7)',
+                clearProps: 'opacity,transform',
+            });
+        });
+        return () => media.revert();
+    }, []);
 
     useEffect(() => {
         return () => {
@@ -68,7 +88,7 @@ export function Body() {
             <div className="container mx-auto px-6 py-20 lg:py-32 w-full max-w-7xl flex flex-col lg:flex-row items-center justify-between gap-16 relative z-10">
                 <motion.div
                     variants={containerVariants}
-                    initial="hidden"
+                    initial={reducedMotion ? false : 'hidden'}
                     animate="visible"
                     className="flex-1 text-center lg:text-left max-w-3xl order-2 lg:order-1"
                 >
@@ -93,7 +113,7 @@ export function Body() {
                         {badges.map((badge, index) => (
                             <motion.div
                                 key={index}
-                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileHover={reducedMotion ? undefined : { scale: 1.05, y: -2 }}
                                 className="flex items-center px-4 py-2 bg-slate-900/55 backdrop-blur-sm text-slate-100 text-sm font-medium rounded-full border border-amber-200/25"
                             >
                                 {index === 1 ? <CalendarIcon className="mr-2 h-4 w-4" /> : <CodeIcon className="mr-2 h-4 w-4" />}
@@ -131,11 +151,8 @@ export function Body() {
                     </motion.a>
                 </motion.div>
 
-                <motion.div
-                    variants={itemVariants}
-                    initial={{ opacity: 0, rotate: -5, scale: 0.9 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    transition={{ duration: 1, delay: 0.4, ease: 'backOut' }} 
+                <div
+                    ref={visualRef}
                     className="hero-visual flex-1 flex flex-col justify-center order-1 lg:order-2 mb-8 lg:mb-0"
                 >
                     <figure className="hero-character-card">
@@ -147,6 +164,7 @@ export function Body() {
                             className="hero-character-image"
                             fetchPriority="high"
                         />
+                        <HeroPortraitLight />
                         <div className="hero-character-topline" aria-hidden="true">
                             <span>VICE CITY // PORTFOLIO</span>
                             <span>01 — 26</span>
@@ -159,7 +177,7 @@ export function Body() {
                     <div className="hero-terminal-console">
                         <TerminalWindow />
                     </div>
-                </motion.div>
+                </div>
             </div>
         </main>
     );

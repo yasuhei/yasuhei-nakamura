@@ -14,19 +14,31 @@ export const bodyEn = [{
     paragrafo2: "Here you'll find my latest projects and the technologies I use to create effective web solutions. Explore the projects and get in touch to discuss how I can collaborate with you!",
     curriculo: 'Download CV'
 }]
-export const sobreBr = [{
+export const sobreBr = {
     titulo: "Sobre Mim",
-    paragrafo: "Desenvolvedor Fullstack com experiência em projetos de médio e grande porte, atuando principalmente com Angular, Node.js e APIs REST no setor financeiro. Foco em código limpo, testes automatizados, performance e boas práticas, com vivência em ambientes ágeis e colaboração ativa com times multidisciplinares. Tenho conhecimentos em Java, CI/CD, Docker e Kubernetes aplicados em projetos práticos e atualmente curso pós-graduação em Engenharia de Software com Java e IA.",
-    journey: [
-        { title: "Início da Jornada", desc: "Descrição...", icon: "Code2" }, // Use string para icon name se preferir
-        // ...
-    ]
-}]
-export const sobreEn = [{
-    titulo: 'get to know me',
-    paragrafo: "Fullstack Developer with experience in mid-size and large projects, working mainly with Angular, Node.js and REST APIs in the financial sector. I focus on clean code, automated testing, performance and best practices, with experience in agile environments and close collaboration with cross-functional teams. I have hands-on knowledge of Java, CI/CD, Docker and Kubernetes in practical projects, and I'm currently pursuing a postgraduate degree in Software Engineering with Java and AI."
+    chamada: "Da interface à API.",
+    paragrafo: "Sou desenvolvedor full-stack e atuo com Angular, Node.js e APIs REST em projetos do setor financeiro. No dia a dia, trabalho com testes automatizados e integração de sistemas. Atualmente, aprofundo meus conhecimentos em Java e IA na pós-graduação em Engenharia de Software.",
+    retratoAlt: "Retrato ilustrado de Yasuhei Nakamura em uma cidade tropical ao pôr do sol",
+    tituloJornada: "Minha Jornada",
+    jornada: [
+        { marco: "2021", titulo: "Primeiras interfaces", texto: "Comecei no front-end, transformando protótipos do Figma em interfaces e landing pages." },
+        { marco: "2023", titulo: "Da interface à API", texto: "Passei a atuar como full-stack, integrando Angular, Node.js e APIs REST em projetos do setor financeiro." },
+        { marco: "Hoje", titulo: "Próximo capítulo", texto: "Estou aprofundando Java e IA na pós-graduação em Engenharia de Software." },
+    ],
+};
 
-}]
+export const sobreEn = {
+    titulo: "About Me",
+    chamada: "From interface to API.",
+    paragrafo: "I'm a full-stack developer working with Angular, Node.js and REST APIs on financial-sector projects. My day-to-day work includes automated testing and systems integration. I'm currently deepening my knowledge of Java and AI in a postgraduate Software Engineering program.",
+    retratoAlt: "Illustrated portrait of Yasuhei Nakamura in a tropical city at sunset",
+    tituloJornada: "My Journey",
+    jornada: [
+        { marco: "2021", titulo: "First interfaces", texto: "I started in front-end development, turning Figma prototypes into interfaces and landing pages." },
+        { marco: "2023", titulo: "From interface to API", texto: "I moved into full-stack development, integrating Angular, Node.js and REST APIs in financial-sector projects." },
+        { marco: "Today", titulo: "Next chapter", texto: "I'm deepening my knowledge of Java and AI in a postgraduate Software Engineering program." },
+    ],
+};
 
 export const expBr = [
     {

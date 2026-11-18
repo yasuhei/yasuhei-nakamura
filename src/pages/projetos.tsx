@@ -1,4 +1,5 @@
-import { motion, Variants } from "framer-motion"; 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { gsap } from "gsap";
 import { Title } from "../components/title";
 import { useLanguage } from "../context/navegadorContext"; 
 import { projBr, projEn } from "../Utils/translate";
@@ -9,10 +10,13 @@ import Planner from '../img/planner.jpg';
 import Tiao from '../img/tiao.jpg';
 import ArenaFC from '../img/arena-fc.jpeg';
 
-import { useState, useMemo } from "react"; 
+import { useState, useMemo, type FocusEvent, type PointerEvent } from "react";
+import "./projectCards.css";
 
 export function Projetos() {
     const language = useLanguage();
+    const isPortuguese = language === 'pt-BR';
+    const reducedMotion = useReducedMotion();
     const id = language === 'pt-BR' ? "projetos" : "projects";
     const projetosArray = language === 'pt-BR' ? projBr : projEn; 
 
@@ -75,29 +79,33 @@ export function Projetos() {
             : projectsData.filter(p => p.category === filter);
     }, [filter, projectsData]);
 
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-        }
+    const scanCard = (card: HTMLElement) => {
+        if (reducedMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const beam = card.querySelector('.project-card-beam');
+        if (!beam) return;
+        gsap.fromTo(beam, { xPercent: 0, opacity: 0.85 }, {
+            xPercent: 610,
+            opacity: 0,
+            duration: 0.72,
+            ease: 'power2.out',
+            overwrite: true,
+        });
     };
 
-    const cardVariants: Variants = {
-        hidden: { opacity: 0, y: 30, scale: 0.95 },
-        visible: { 
-            opacity: 1, 
-            y: 0, 
-            scale: 1, 
-            transition: { duration: 0.5, ease: 'easeOut' }
-        }
+    const handlePointerEnter = (event: PointerEvent<HTMLElement>) => {
+        if (event.pointerType === 'mouse') scanCard(event.currentTarget);
+    };
+
+    const handleFocus = (event: FocusEvent<HTMLElement>) => {
+        if (event.relatedTarget instanceof Node && event.currentTarget.contains(event.relatedTarget)) return;
+        if (event.target instanceof HTMLElement && event.target.matches(':focus-visible')) scanCard(event.currentTarget);
     };
 
     return (
         <section id={id} className="w-full relative py-20 lg:py-32 overflow-hidden"> 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={reducedMotion ? false : { opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="text-center mb-12"
@@ -109,8 +117,10 @@ export function Projetos() {
                     {Object.entries(filterLabels).map(([key, label]) => (
                         <motion.button
                             key={key}
+                            type="button"
+                            aria-pressed={filter === key}
                             onClick={() => setFilter(key)}
-                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileHover={reducedMotion ? undefined : { scale: 1.05, y: -2 }}
                             className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
                                 filter === key
                                     ? 'bg-amber-300 text-slate-900 shadow-lg shadow-amber-500/20'
@@ -123,84 +133,74 @@ export function Projetos() {
                     ))}
                 </div>
 
-                <motion.div
-                    key={filter} 
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ margin: "-100px 0px" }} 
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
-                >
-                    {filteredProjects.map((project, index) => (
-                        <motion.div
-                            key={`${project.descricao}-${index}`} 
-                            variants={cardVariants}
-                            whileHover={{ 
-                                scale: 1.02, 
-                                y: -10, 
-                                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' 
-                            }}
-                            className="group relative overflow-hidden rounded-2xl bg-slate-950/60 backdrop-blur-md border border-amber-200/20 shadow-xl hover:shadow-amber-500/20 transition-all duration-500 h-auto"
+                <div className="project-showcase">
+                    <AnimatePresence initial={false} mode="popLayout">
+                        {filteredProjects.map((project) => (
+                        <motion.article
+                            key={project.linkGit}
+                            layout={reducedMotion ? false : 'position'}
+                            initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={reducedMotion ? undefined : { opacity: 0, y: 8 }}
+                            transition={{ duration: reducedMotion ? 0 : 0.23, layout: { duration: 0.32 } }}
+                            onPointerEnter={handlePointerEnter}
+                            onFocus={handleFocus}
+                            className="project-card"
                         >
-                            <div className="relative">
+                            <div className="project-card-media">
                                 <img 
                                     src={project.img} 
-                                    alt={`${project.descricao} - Projeto de ${project.category}`}
-                                    className="w-full h-48 lg:h-56 object-cover transition-transform duration-500 group-hover:scale-110"
+                                    alt=""
+                                    className="project-card-image"
                                     loading="lazy"
                                 />
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileHover={{ opacity: 1, y: 0 }}
-                                    className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4"
-                                >
-                                    <div className="flex gap-4">
+                                <span className="project-card-beam" aria-hidden="true" />
+                                <span className="project-card-category">
+                                    {project.category === 'frontend' ? filterLabels.frontend : filterLabels.fullstack}
+                                </span>
+                            </div>
+
+                            <div className="project-card-body">
+                                <h3 className="project-card-title">{project.descricao}</h3>
+                                <p className="project-card-description text-slate-200 mb-4 leading-relaxed">{project.texto}</p>
+
+                                <ul className="flex flex-wrap gap-2 mb-5">
+                                    {project.techs.map((tech) => (
+                                        <li key={tech} className="px-3 py-1 bg-amber-300/15 text-amber-100 rounded-full text-sm font-medium border border-amber-200/20">
+                                            {tech}
+                                        </li>
+                                        ))}
+                                </ul>
+
+                                    <div className="project-card-actions">
                                         <a 
                                             href={project.linkGit} 
                                             target="_blank" 
                                             rel="noopener noreferrer"
-                                            className="p-3 bg-amber-300/85 rounded-full text-slate-900 hover:bg-amber-200 transition-all"
-                                            aria-label={`Ver código no GitHub de ${project.descricao}`}
+                                            aria-label={isPortuguese ? `Ver código no GitHub de ${project.descricao}` : `View ${project.descricao} source on GitHub`}
                                         >
-                                            <Github size={20} />
+                                            <Github size={16} aria-hidden="true" /> GitHub
                                         </a>
                                         {project.linkDemo && (
                                             <a 
                                                 href={project.linkDemo} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
-                                                className="p-3 bg-white/20 rounded-full text-white hover:bg-white/30 transition-all"
-                                                aria-label={`Ver demo de ${project.descricao}`}
+                                                aria-label={isPortuguese ? `Ver demo de ${project.descricao}` : `View the ${project.descricao} demo`}
                                             >
-                                                <ExternalLink size={20} />
+                                                <ExternalLink size={16} aria-hidden="true" /> Demo
                                             </a>
                                         )}
                                     </div>
-                                </motion.div>
                             </div>
-
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold text-white mb-2">{project.descricao}</h3>
-                                <p className="text-slate-200 mb-4 leading-relaxed">{project.texto}</p>
-                                
-                                <div className="flex flex-wrap gap-2 mb-4">
-                                    {project.techs.map((tech, i) => (
-                                        <span 
-                                            key={i} 
-                                            className="px-3 py-1 bg-amber-300/15 text-amber-100 rounded-full text-sm font-medium border border-amber-200/20"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
+                        </motion.article>
                     ))}
-                </motion.div>
+                    </AnimatePresence>
+                </div>
 
                 {filteredProjects.length === 0 && (
                     <motion.p
-                        initial={{ opacity: 0 }}
+                        initial={reducedMotion ? false : { opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         className="text-center text-slate-300 mt-8 col-span-full"
                     >

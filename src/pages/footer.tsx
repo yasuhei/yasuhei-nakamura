@@ -1,11 +1,13 @@
 import { motion, Variants } from "framer-motion"; 
 import { Mail, Github, Linkedin, ArrowUp } from 'lucide-react';
 import { Title } from "../components/title";
+import { useSectionLink } from "../components/useSectionLink";
 import { footerBr, footerEn } from '../Utils/translate';
 import { useLanguage } from "../context/navegadorContext";
 import { useEffect, useState } from "react";
 
 export function Footer() {
+    const followSectionLink = useSectionLink();
     const language = useLanguage();
     const footerText = language === 'pt-BR' ? footerBr : footerEn;
     const id = language === 'pt-BR' ? "contato" : "contact";
@@ -23,10 +25,6 @@ export function Footer() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
 
     // Animações
     const containerVariants: Variants = {
@@ -140,8 +138,9 @@ export function Footer() {
                         {footerText} 
                     </motion.p>
 
-                    <motion.button
-                        onClick={scrollToTop}
+                    <motion.a
+                        href="#home"
+                        onClick={(event) => followSectionLink(event, 'home')}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: showTopBtn ? 1 : 0, scale: showTopBtn ? 1 : 0.8 }}
                         transition={{ duration: 0.3 }}
@@ -149,7 +148,7 @@ export function Footer() {
                         aria-label={language === 'pt-BR' ? "Voltar ao topo" : "Back to top"}
                     >
                         <ArrowUp size={20} />
-                    </motion.button>
+                    </motion.a>
                 </motion.div>
             </div>
         </footer>

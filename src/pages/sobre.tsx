@@ -1,204 +1,109 @@
-import {  useState, useEffect, useRef } from 'react'; 
+import { useLayoutEffect, useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowUpRight, ArrowDown, Code2, Github, GraduationCap, Layers, Linkedin, Mail } from 'lucide-react';
 import { useLanguage } from '../context/navegadorContext';
 import Selfie from '../assets/vice-city-character.png';
-import { Mail, Github, Linkedin, Code2, Award, Users } from 'lucide-react'; 
 import { sobreBr, sobreEn } from '../Utils/translate';
-import { motion, Variants } from 'framer-motion';
+import './sobre.css';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const chapterIcons = [Code2, Layers, GraduationCap];
+const socials = [
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/yasuhei-nakamura-9aa80a93/', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/yasuhei', label: 'GitHub' },
+    { icon: Mail, href: 'mailto:yasuhei.nakamura@hotmail.com', label: 'E-mail' },
+];
 
 export function Sobre() {
-    const language = useLanguage();
-    const languageArray = language === 'pt-BR' ? sobreBr : sobreEn;
+    const isPortuguese = useLanguage() === 'pt-BR';
+    const { titulo, chamada, paragrafo, tituloJornada, jornada, retratoAlt } = isPortuguese ? sobreBr : sobreEn;
+    const id = isPortuguese ? 'sobre' : 'about';
+    const timelineRef = useRef<HTMLDivElement>(null);
+    const lineRef = useRef<HTMLDivElement>(null);
+    const reducedMotion = useReducedMotion();
 
-    const { titulo, paragrafo } = languageArray[0];
-    const id = language === 'pt-BR' ? "sobre" : "about";
+    useLayoutEffect(() => {
+        const timeline = timelineRef.current;
+        const line = lineRef.current;
+        if (!timeline || !line) return;
 
-    const journeySlides = language === 'pt-BR' 
-        ? [
-            { title: "Início da Jornada", desc: "Comecei como dev front-end em 2021, criando interfaces a partir do Figma e landing pages.", icon: Code2 },
-            { title: "Especialização Full-Stack", desc: "Evoluí para fullstack com Angular, Node.js e APIs REST em projetos do setor financeiro.", icon: Award },
-            { title: "Evolução Contínua", desc: "Estudando Java, CI/CD, Docker e Kubernetes na pós-graduação em Engenharia de Software com Java e IA.", icon: Users }
-          ]
-        : [
-            { title: "Journey Start", desc: "Started as a front-end dev in 2021, building Figma-based interfaces and landing pages.", icon: Code2 },
-            { title: "Full-Stack Expertise", desc: "Grew into fullstack with Angular, Node.js and REST APIs on financial-sector projects.", icon: Award },
-            { title: "Continuous Growth", desc: "Studying Java, CI/CD, Docker and Kubernetes in a postgraduate program in Software Engineering with Java and AI.", icon: Users }
-          ];
-
-    const containerVariants: Variants  = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.2, delayChildren: 0.3 }
-        }
-    };
-
-    const itemVariants: Variants  = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-    };
-
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const slideInterval = useRef<ReturnType<typeof setInterval> | null>(null);
-
-    useEffect(() => {
-        slideInterval.current = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % journeySlides.length);
-        }, 4000); 
-        return () => {
-            if (slideInterval.current) clearInterval(slideInterval.current);
-        };
-    }, [journeySlides.length]);
-
-    const handleDotClick = (index: number) => {
-        setCurrentSlide(index);
-    };
+        const media = gsap.matchMedia();
+        media.add('(prefers-reduced-motion: no-preference)', () => {
+            gsap.from(line, {
+                scaleY: 0,
+                ease: 'none',
+                scrollTrigger: { trigger: timeline, start: 'top 80%', end: 'bottom 60%', scrub: true },
+            });
+        });
+        return () => media.revert();
+    }, []);
 
     return (
-        <section id={id} className="w-full relative py-20 lg:py-32 overflow-hidden">
-            <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                <motion.div 
-                    variants={itemVariants}
-                    initial="hidden" 
-                    whileInView="visible" 
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                </motion.div>
+        <section id={id} aria-labelledby={`${id}-title`} className="w-full py-20 lg:py-32">
+            <div className="container mx-auto px-6 max-w-7xl">
+                <div className="about-profile">
+                    <figure className="about-profile-portrait">
+                        <img src={Selfie} alt={retratoAlt} loading="lazy" />
+                        <figcaption className="about-profile-caption">
+                            <span className="about-kicker">VICE CITY // {isPortuguese ? 'PERFIL' : 'PROFILE'}</span>
+                            <span>Yasuhei Nakamura</span>
+                        </figcaption>
+                    </figure>
 
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="grid lg:grid-cols-2 gap-12 items-center mb-16 bg-slate-950/60 backdrop-blur-md rounded-2xl p-8 lg:p-12 border border-amber-200/20 shadow-2xl"
-                >
-                    <motion.div
-                        variants={itemVariants}
-                        className="relative flex justify-center lg:justify-start"
-                        animate={{ y: [0, -10, 0] }} // Float sutil
-                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                        <div className="relative group">
-                            <img 
-                                src={Selfie} 
-                                alt="Retrato ilustrado de Yasuhei Nakamura com luzes de uma cidade tropical ao pôr do sol"
-                                className="about-character-portrait w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-amber-200/50 shadow-2xl drop-shadow-lg"
-                                loading="lazy"
-                            />
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                whileHover={{ opacity: 1 }}
-                                className="absolute inset-0 rounded-full bg-slate-950/70 flex items-center justify-center backdrop-blur-md"
-                            >
-                                <span className="text-white font-bold text-lg">Yasuhei Nakamura</span>
-                            </motion.div>
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        variants={itemVariants}
-                        className="text-center lg:text-left space-y-6"
-                    >
-                        <h2 className="text-2xl lg:text-3xl font-black uppercase text-white tracking-tight"> 
-                            {titulo}
-                        </h2>
-                        <p className="text-lg text-slate-200 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium"> 
-                            {paragrafo}
-                        </p>
-                        <ul className="flex justify-center lg:justify-start gap-8 pt-6">
-                            {[
-                                { icon: Mail, href: "mailto:yasuhei.nakamura@hotmail.com", label: "Email" },
-                                { icon: Github, href: "https://github.com/yasuhei", label: "GitHub" },
-                                { icon: Linkedin, href: "https://www.linkedin.com/in/yasuhei-nakamura-9aa80a93/", label: "LinkedIn" }
-                            ].map((social, index) => (
-                                <motion.li
-                                    key={index}
-                                    whileHover={{ scale: 1.2, y: -4 }}
-                                    className="relative"
-                                >
-                                    <a 
-                                        href={social.href} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        className="text-amber-200 hover:text-amber-100 transition-all duration-300 p-3 bg-slate-900/70 rounded-full backdrop-blur-sm shadow-lg hover:shadow-amber-500/20 border border-amber-200/20"
-                                        aria-label={social.label}
-                                    >
-                                        <social.icon size={24} />
+                    <div className="about-profile-body">
+                        <h2 id={`${id}-title`} className="about-kicker">{titulo}</h2>
+                        <p className="about-profile-headline">{chamada}</p>
+                        <p className="about-profile-summary">{paragrafo}</p>
+                        <ul className="about-profile-links">
+                            {socials.map(({ icon: Icon, href, label }) => (
+                                <li key={label}>
+                                    <a href={href} target={label === 'E-mail' ? undefined : '_blank'} rel="noopener noreferrer">
+                                        <Icon size={16} aria-hidden="true" />
+                                        {label}
+                                        <ArrowUpRight size={13} aria-hidden="true" />
                                     </a>
-                                </motion.li>
+                                </li>
                             ))}
                         </ul>
-                    </motion.div>
-                </motion.div>
-
-                <motion.div
-                    variants={itemVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="w-full"
-                    role="region"
-                    aria-label="Carrossel da jornada profissional"
-                >
-                    <h3 className="text-xl font-bold text-center text-slate-100 mb-8 uppercase tracking-wide"> 
-                        {language === 'pt-BR' ? "Minha Jornada" : "My Journey"}
-                    </h3>
-                    <div className="relative overflow-hidden rounded-2xl bg-slate-950/60 backdrop-blur-md border border-amber-200/20 shadow-2xl">
-                        {/* Slides */}
-                        <div className="flex transition-transform duration-700 ease-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-                            {journeySlides.map((slide, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="min-w-full p-8 text-center flex flex-col items-center justify-center h-64 lg:h-80"
-                                    initial={{ opacity: 0.7, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.2 }}
-                                >
-                                    <motion.div
-                                        whileHover={{ scale: 1.05, rotate: 1 }}
-                                        className="mb-4 p-4 bg-amber-300/20 rounded-full" 
-                                    >
-                                        <slide.icon size={48} className="text-amber-100" /> 
-                                    </motion.div>
-                                    <h4 className="text-xl font-bold text-white mb-4"> 
-                                        {slide.title}
-                                    </h4>
-                                    <p className="text-slate-200 max-w-md"> 
-                                        {slide.desc}
-                                    </p>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        <div className="flex justify-center gap-2 mt-6 pb-4">
-                            {journeySlides.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => handleDotClick(index)}
-                                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                        currentSlide === index 
-                                            ? 'bg-amber-300 scale-125 shadow-lg' 
-                                            : 'bg-slate-500 hover:bg-amber-200'
-                                    }`} 
-                                    aria-label={`Ir para slide ${index + 1}`}
-                                />
-                            ))}
-                        </div>
-
-                        <motion.div
-                            className="absolute inset-0"
-                            onHoverStart={() => slideInterval.current && clearInterval(slideInterval.current)}
-                            onHoverEnd={() => {
-                                if (slideInterval.current) clearInterval(slideInterval.current);
-                                slideInterval.current = setInterval(() => setCurrentSlide((prev) => (prev + 1) % journeySlides.length), 4000);
-                            }}
-                        />
                     </div>
-                </motion.div>
-            </div>
+                </div>
 
-            <div className="absolute bottom-0 left-0 w-full h-20 lg:h-32 bg-gradient-to-t from-[#101827] to-transparent flex items-end justify-center"> 
-                <div className="w-full h-1 bg-gradient-to-r from-amber-300 via-amber-100 to-sky-300 opacity-80" /> 
+                <div className="about-journey" role="region" aria-labelledby={`${id}-journey`}>
+                    <div className="about-journey-heading">
+                        <h3 id={`${id}-journey`} className="terminal-heading">{tituloJornada}</h3>
+                        <ArrowDown size={20} aria-hidden="true" />
+                    </div>
+                    <div ref={timelineRef} className="about-journey-track">
+                        <div ref={lineRef} className="about-journey-progress" aria-hidden="true" />
+                        <ol className="about-journey-list">
+                            {jornada.map(({ marco, titulo, texto }, index) => {
+                                const Icon = chapterIcons[index];
+                                return (
+                                    <li key={marco} className="about-journey-step">
+                                        <motion.span
+                                            className="about-journey-marker"
+                                            aria-hidden="true"
+                                            initial={false}
+                                            whileInView={reducedMotion ? undefined : { scale: [1, 1.16, 1], boxShadow: ['0 0 0px #69e3e200', '0 0 18px #69e3e280', '0 0 0px #69e3e200'] }}
+                                            viewport={{ once: true, amount: 0.8 }}
+                                            transition={{ duration: 0.55 }}
+                                        >
+                                            <Icon size={19} />
+                                        </motion.span>
+                                        <div className="about-journey-card">
+                                            <p className="about-kicker">{marco}</p>
+                                            <h4>{titulo}</h4>
+                                            <p>{texto}</p>
+                                        </div>
+                                    </li>
+                                );
+                            })}
+                        </ol>
+                    </div>
+                </div>
             </div>
         </section>
     );
