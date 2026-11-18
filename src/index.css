@@ -273,9 +273,10 @@ header.terminal-navigation {
 }
 
 .terminal-mobile-menu {
-  top: 4.75rem;
+  top: calc(100% + 0.5rem);
   right: 1rem;
   width: min(22rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 5.75rem);
   padding: 0.6rem;
   border: 1px solid rgba(255, 111, 155, 0.3);
   border-radius: 1rem;

@@ -15,8 +15,8 @@ export function Home() {
         <ReactLenis root>
             <MotionConfig reducedMotion="user">
                 <TerminalBackground />
+                <Header />
                 <section className="flex flex-col items-center min-h-screen">
-                    <Header />
                     <Body />
                     <Sobre />
                     <Skills />

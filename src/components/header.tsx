@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { motion } from "framer-motion";
 import { useLanguage } from "../context/navegadorContext";
 import { idiomaBr, idiomaEn } from "../Utils/translate";
 import { MenuIcon, XIcon } from "lucide-react";
@@ -11,6 +11,7 @@ export function Header() {
     const [modalOpen, setModalOpen] = useState(false);
     const followSectionLink = useSectionLink();
     const menuAudioRef = useRef<HTMLAudioElement | null>(null);
+    const menuButtonRef = useRef<HTMLButtonElement>(null);
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? idiomaBr : idiomaEn;
     const sectionIds = useMemo(
@@ -56,23 +57,22 @@ export function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [sectionIds]);
 
-    useEffect(() => {
-        if (!modalOpen) {
-            document.body.style.overflow = '';
-            return;
-        }
+    useLayoutEffect(() => {
+        if (!modalOpen) return;
 
+        const previousOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
 
         const handleEscape = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 setModalOpen(false);
+                menuButtonRef.current?.focus();
             }
         };
 
         window.addEventListener('keydown', handleEscape);
         return () => {
-            document.body.style.overflow = '';
+            document.body.style.overflow = previousOverflow;
             window.removeEventListener('keydown', handleEscape);
         };
     }, [modalOpen]);
@@ -111,14 +111,8 @@ export function Header() {
     };
 
 
-    const modalVariants = {
-        hidden: { x: '100%' }, 
-        visible: { x: 0 },
-        exit: { x: '100%' }
-    };
-
     return (
-        <header className="terminal-navigation fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-md shadow-lg shadow-black/30 transition-all duration-300 border-b border-white/10">
+        <header className="terminal-navigation fixed inset-x-0 top-0 w-full z-50 bg-slate-950/70 backdrop-blur-md shadow-lg shadow-black/30 transition-all duration-300 border-b border-white/10">
             <div className="terminal-navigation-inner">
                 <div className="terminal-navigation-row">
                     <motion.a
@@ -158,6 +152,8 @@ export function Header() {
 
                     <div className="terminal-menu-toggle lg:hidden">
                         <button
+                            ref={menuButtonRef}
+                            type="button"
                             onClick={() => openModal(!modalOpen)}
                             className="terminal-menu-button"
                             aria-label={modalOpen ? "Fechar menu" : "Abrir menu"}
@@ -169,26 +165,18 @@ export function Header() {
                     </div>
                 </div>
 
-                <AnimatePresence>
-                    {modalOpen && (
+                {modalOpen && (
                         <>
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="terminal-menu-overlay fixed inset-0 bg-black/50 lg:hidden z-40"
-                                onClick={() => openModal(false)} 
+                            <div
+                                className="terminal-menu-overlay absolute inset-x-0 top-full h-[100dvh] bg-black/50 lg:hidden z-40"
+                                onClick={() => openModal(false)}
+                                aria-hidden="true"
                             />
-                            <motion.nav
+                            <nav
                                 id="mobile-menu"
                                 data-lenis-prevent
                                 aria-label="Navegação principal"
-                                variants={modalVariants}
-                                initial="hidden"
-                                animate="visible"
-                                exit="exit"
-                                transition={{ duration: 0.3 }}
-                                className="terminal-mobile-menu fixed top-16 right-0 lg:hidden bg-slate-950/95 backdrop-blur-md shadow-lg shadow-black/40 border-l border-white/10 z-50 overflow-y-auto"
+                                className="terminal-mobile-menu absolute lg:hidden bg-slate-950/95 backdrop-blur-md shadow-lg shadow-black/40 border-l border-white/10 z-50 overflow-y-auto overscroll-contain"
                             >
                                 <ul>
                                 {navItems.map((item, index) => (
@@ -210,10 +198,9 @@ export function Header() {
                                     </li>
                                 ))}
                                 </ul>
-                            </motion.nav>
+                            </nav>
                         </>
-                    )}
-                </AnimatePresence>
+                )}
             </div>
         </header>
     );
