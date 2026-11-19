@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
-import { motion, Variants, useReducedMotion } from 'framer-motion';
+import { motion, Variants, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
 import { CalendarIcon, CodeIcon, DownloadIcon } from 'lucide-react';
 import { bodyBr, bodyEn } from '../Utils/translate';
@@ -14,7 +14,13 @@ import { useLanguage } from '../context/navegadorContext';
 export function Body() {
     const downloadAudioRef = useRef<HTMLAudioElement | null>(null);
     const visualRef = useRef<HTMLDivElement>(null);
+    const heroRef = useRef<HTMLElement>(null);
     const reducedMotion = useReducedMotion();
+    const { scrollYProgress: heroScrollProgress } = useScroll({
+        target: heroRef,
+        offset: ['start start', 'end start'],
+    });
+    const heroParallax = useTransform(heroScrollProgress, [0, 1], reducedMotion ? [0, 0] : [0, -40]);
     const language = useLanguage();
     const languageArray = language === 'pt-BR' ? bodyBr : bodyEn;
     const curric = language === 'pt-BR' ? pdf : pdfEn;
@@ -84,7 +90,7 @@ export function Body() {
     };
 
     return (
-        <main id="home" className="terminal-hero w-full min-h-screen flex items-center justify-center relative overflow-hidden">
+        <main ref={heroRef} id="home" className="terminal-hero w-full min-h-screen flex items-center justify-center relative overflow-hidden">
             <div className="container mx-auto px-6 py-20 lg:py-32 w-full max-w-7xl flex flex-col lg:flex-row items-center justify-between gap-16 relative z-10">
                 <motion.div
                     variants={containerVariants}
@@ -151,33 +157,35 @@ export function Body() {
                     </motion.a>
                 </motion.div>
 
-                <div
-                    ref={visualRef}
-                    className="hero-visual flex-1 flex flex-col justify-center order-1 lg:order-2 mb-8 lg:mb-0"
-                >
-                    <figure className="hero-character-card">
-                        <img
-                            src={characterArt}
-                            alt={language === 'pt-BR'
-                                ? 'Retrato ilustrado de Yasuhei Nakamura em uma cidade tropical ao pôr do sol'
-                                : 'Illustrated portrait of Yasuhei Nakamura in a tropical city at sunset'}
-                            className="hero-character-image"
-                            fetchPriority="high"
-                        />
-                        <HeroPortraitLight />
-                        <div className="hero-character-topline" aria-hidden="true">
-                            <span>VICE CITY // PORTFOLIO</span>
-                            <span>01 — 26</span>
+                <motion.div style={{ y: heroParallax }} className="flex-1 order-1 lg:order-2 mb-8 lg:mb-0">
+                    <div
+                        ref={visualRef}
+                        className="hero-visual flex flex-col justify-center"
+                    >
+                        <figure className="hero-character-card">
+                            <img
+                                src={characterArt}
+                                alt={language === 'pt-BR'
+                                    ? 'Retrato ilustrado de Yasuhei Nakamura em uma cidade tropical ao pôr do sol'
+                                    : 'Illustrated portrait of Yasuhei Nakamura in a tropical city at sunset'}
+                                className="hero-character-image"
+                                fetchPriority="high"
+                            />
+                            <HeroPortraitLight />
+                            <div className="hero-character-topline" aria-hidden="true">
+                                <span>VICE CITY // PORTFOLIO</span>
+                                <span>01 — 26</span>
+                            </div>
+                            <figcaption className="hero-character-caption">
+                                <span>YASUHEI NAKAMURA</span>
+                                <span>{language === 'pt-BR' ? 'PERSONAGEM PRINCIPAL · DEV FULL-STACK' : 'PLAYER ONE · FULL-STACK DEV'}</span>
+                            </figcaption>
+                        </figure>
+                        <div className="hero-terminal-console">
+                            <TerminalWindow />
                         </div>
-                        <figcaption className="hero-character-caption">
-                            <span>YASUHEI NAKAMURA</span>
-                            <span>{language === 'pt-BR' ? 'PERSONAGEM PRINCIPAL · DEV FULL-STACK' : 'PLAYER ONE · FULL-STACK DEV'}</span>
-                        </figcaption>
-                    </figure>
-                    <div className="hero-terminal-console">
-                        <TerminalWindow />
                     </div>
-                </div>
+                </motion.div>
             </div>
         </main>
     );

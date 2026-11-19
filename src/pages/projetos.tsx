@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { Title } from "../components/title";
 import { useLanguage } from "../context/navegadorContext"; 
@@ -10,7 +10,7 @@ import Planner from '../img/planner.jpg';
 import Tiao from '../img/tiao.jpg';
 import ArenaFC from '../img/arena-fc.jpeg';
 
-import { useState, useMemo, type FocusEvent, type PointerEvent } from "react";
+import { useState, useMemo, useRef, type FocusEvent, type PointerEvent } from "react";
 import "./projectCards.css";
 
 export function Projetos() {
@@ -18,6 +18,12 @@ export function Projetos() {
     const isPortuguese = language === 'pt-BR';
     const reducedMotion = useReducedMotion();
     const id = language === 'pt-BR' ? "projetos" : "projects";
+    const sectionRef = useRef<HTMLElement>(null);
+    const { scrollYProgress: sectionScrollProgress } = useScroll({
+        target: sectionRef,
+        offset: ['start end', 'end start'],
+    });
+    const showcaseParallax = useTransform(sectionScrollProgress, [0, 1], reducedMotion ? [0, 0] : [18, -18]);
     const projetosArray = language === 'pt-BR' ? projBr : projEn; 
 
     const projectsData = useMemo(() => [ 
@@ -102,7 +108,7 @@ export function Projetos() {
     };
 
     return (
-        <section id={id} className="w-full relative py-20 lg:py-32 overflow-hidden"> 
+        <section ref={sectionRef} id={id} className="w-full relative py-20 lg:py-32 overflow-hidden">
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <motion.div
                     initial={reducedMotion ? false : { opacity: 0, y: -20 }}
@@ -133,16 +139,17 @@ export function Projetos() {
                     ))}
                 </div>
 
-                <div className="project-showcase">
+                <motion.div style={{ y: showcaseParallax }} className="project-showcase">
                     <AnimatePresence initial={false} mode="popLayout">
                         {filteredProjects.map((project) => (
                         <motion.article
                             key={project.linkGit}
                             layout={reducedMotion ? false : 'position'}
                             initial={reducedMotion ? false : { opacity: 0, y: 12 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             exit={reducedMotion ? undefined : { opacity: 0, y: 8 }}
-                            transition={{ duration: reducedMotion ? 0 : 0.23, layout: { duration: 0.32 } }}
+                            transition={{ duration: reducedMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1], layout: { duration: 0.32 } }}
                             onPointerEnter={handlePointerEnter}
                             onFocus={handleFocus}
                             className="project-card"
@@ -196,7 +203,7 @@ export function Projetos() {
                         </motion.article>
                     ))}
                     </AnimatePresence>
-                </div>
+                </motion.div>
 
                 {filteredProjects.length === 0 && (
                     <motion.p
